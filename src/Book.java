@@ -1,10 +1,10 @@
-public class Books {
+public class Book {
     private int bookId;
     private String bookName;
     private String author;
     private boolean isAvailable;
 
-    public Books(int bookId, String bookName, String author, boolean isAvailable) {
+    public Book(int bookId, String bookName, String author, boolean isAvailable) {
         this.bookName = bookName;
         this.author = author;
         this.bookId = bookId;
