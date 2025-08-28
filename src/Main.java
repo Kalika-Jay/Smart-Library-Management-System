@@ -12,7 +12,7 @@ public class Main {
         library.showUsers();
 
         library.searchBookByTitle("kill");
-        library.borrowBookByTitle("1984");
-        library.borrowBookById(2);
+        library.borrowBookByTitle("1984",1);
+        library.borrowBookById(2,1);
     }
 }

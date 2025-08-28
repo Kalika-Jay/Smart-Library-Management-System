@@ -14,6 +14,7 @@ public abstract class User {
     }
     public abstract String getRole();
 
+
     public void displayUserInfo() {
         System.out.println("User ID: " + id + ", Name: " + name + ", Role: " + getRole());
     }

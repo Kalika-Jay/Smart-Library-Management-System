@@ -27,6 +27,14 @@ public class Library {
             user.displayUserInfo();
         }
     }
+    public String getNameAndIdById(int userId) {
+        for (User user : users) {
+            if (user.getId() == userId) {
+                return "User ID: " + user.getId() + ", Name: " + user.getName();
+            }
+        }
+        return "User not found.";
+    }
 
     public void searchBookByTitle(String keyword) {
         List<Book> result = new ArrayList<>();
@@ -58,26 +66,29 @@ public class Library {
         }
     }
 
-    public void borrowBookByTitle(String keyword) {
+    public void borrowBookByTitle(String keyword,int userId) {
         for (Book book: books){
             if(book.getBookName().toLowerCase().equals(keyword.toLowerCase())&& book.isAvailable()){
                 book.unmarkAvailable();
-                System.out.println("You have borrowed: " + book.getBookDetails());
+                System.out.println(getNameAndIdById(userId) +" has borrowed: " + book.getBookDetails());
                 return;
             }
         }
         System.out.println("No books found with the given title.");
     }
 
-    public void borrowBookById(int id) {
+    public void borrowBookById(int id,int userId) {
         for (Book book: books){
             if(book.getBookId() == id && book.isAvailable()){
                 book.unmarkAvailable();
-                System.out.println("You have borrowed: " + book.getBookDetails());
+                System.out.println(getNameAndIdById(userId) +" has borrowed: " + book.getBookDetails());
                 return;
             }
         }
         System.out.println("No books found with the given ID.");
     }
 
+    public void returnBook(){
+
+    }
 }
