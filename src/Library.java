@@ -13,4 +13,19 @@ public class Library {
         books.add(book);
     }
 
+    public void showBooks(){
+        for (Book book : books) {
+            System.out.println(book.getBookDetails());
+        }
+    }
+
+    public void addUser(User user) {
+        users.add(user);
+    }
+    public void showUsers(){
+        for (User user : users) {
+            user.displayUserInfo();
+        }
+    }
+
 }
