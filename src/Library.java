@@ -28,4 +28,56 @@ public class Library {
         }
     }
 
+    public void searchBookByTitle(String keyword) {
+        List<Book> result = new ArrayList<>();
+        for (Book book : books) {
+            if (book.getBookName().toLowerCase().contains(keyword.toLowerCase())) {
+                result.add(book);
+            }
+        }
+        for (Book book : result) {
+            System.out.println("Found: " + book.getBookDetails());
+        }
+        if (result.isEmpty()) {
+            System.out.println("No books found with the given title.");
+        }
+    }
+
+    public void searchBookByAuthor(String keyword) {
+        List<Book> result = new ArrayList<>();
+        for (Book book : books) {
+            if (book.getAuthor().toLowerCase().contains(keyword.toLowerCase())) {
+                result.add(book);
+            }
+        }
+        for (Book book : result) {
+            System.out.println("Found: " + book.getBookDetails());
+        }
+        if (result.isEmpty()) {
+            System.out.println("No books found with the given title.");
+        }
+    }
+
+    public void borrowBookByTitle(String keyword) {
+        for (Book book: books){
+            if(book.getBookName().toLowerCase().equals(keyword.toLowerCase())&& book.isAvailable()){
+                book.unmarkAvailable();
+                System.out.println("You have borrowed: " + book.getBookDetails());
+                return;
+            }
+        }
+        System.out.println("No books found with the given title.");
+    }
+
+    public void borrowBookById(int id) {
+        for (Book book: books){
+            if(book.getBookId() == id && book.isAvailable()){
+                book.unmarkAvailable();
+                System.out.println("You have borrowed: " + book.getBookDetails());
+                return;
+            }
+        }
+        System.out.println("No books found with the given ID.");
+    }
+
 }

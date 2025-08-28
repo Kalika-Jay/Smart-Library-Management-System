@@ -10,6 +10,18 @@ public class Book {
         this.bookId = bookId;
         this.isAvailable = isAvailable;
     }
+    public String getBookName() {
+        return bookName;
+    }
+    public String getAuthor() {
+        return author;
+    }
+    public int getBookId() {
+        return bookId;
+    }
+    public boolean isAvailable() {
+        return isAvailable;
+    }
     public String getBookDetails() {
         return "Book Name: " + bookName + ", Author: " + author + ", Book ID: " + bookId+", Available: " + isAvailable;
     }
