@@ -1,3 +1,5 @@
+package library;
+
 public class Book {
     private int bookId;
     private String bookName;
@@ -23,7 +25,7 @@ public class Book {
         return isAvailable;
     }
     public String getBookDetails() {
-        return "Book Name: " + bookName + ", Author: " + author + ", Book ID: " + bookId+", Available: " + isAvailable;
+        return "library.Book Name: " + bookName + ", Author: " + author + ", library.Book ID: " + bookId+", Available: " + isAvailable;
     }
     public void markAvailable() {
         isAvailable = true;

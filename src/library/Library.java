@@ -1,3 +1,5 @@
+package library;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,10 +32,10 @@ public class Library {
     public String getNameAndIdById(int userId) {
         for (User user : users) {
             if (user.getId() == userId) {
-                return "User ID: " + user.getId() + ", Name: " + user.getName();
+                return "library.User ID: " + user.getId() + ", Name: " + user.getName();
             }
         }
-        return "User not found.";
+        return "library.User not found.";
     }
 
     public void searchBookByTitle(String keyword) {
@@ -89,6 +91,5 @@ public class Library {
     }
 
     public void returnBook(){
-
     }
 }

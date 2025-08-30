@@ -1,3 +1,5 @@
+package library;
+
 public class Librarian extends User{
     public Librarian(int id, String name) {
         super(id, name);
@@ -5,6 +7,6 @@ public class Librarian extends User{
 
     @Override
     public String getRole() {
-        return "Librarian";
+        return "library.Librarian";
     }
 }
