@@ -1,6 +1,7 @@
 package app;
 
 import database.Tables;
+import database.db;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,6 +18,6 @@ public class Main {
 //        library.searchBookByTitle("kill");
 //        library.borrowBookByTitle("1984",1);
 //        library.borrowBookById(2,1);
-        Tables.initialize();
+        db.connect();
     }
 }
