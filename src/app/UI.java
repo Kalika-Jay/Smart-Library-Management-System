@@ -1,13 +1,19 @@
 package app;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import library.Library;
 
+import java.io.IOException;
 import java.util.List;
 
 public class UI extends Application {
@@ -17,18 +23,10 @@ public class UI extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
-        Library library = new Library();
-        ListView<String> listView = new ListView<>();
-
-        Button loadBooksButton = new Button("Load Books");
-        loadBooksButton.setOnAction(e -> {
-            listView.getItems().clear();
-            List<String> books = library.getAllBooks();
-            listView.getItems().addAll(books);
-        });
-
-        VBox root = new VBox(10, loadBooksButton, listView);
+    public void start(Stage primaryStage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ui.fxml"));
+        Parent root = loader.load();
+//        VBox root = new VBox(10, loadBooksButton, listView);
         Scene scene = new Scene(root, 400, 300);
 
         primaryStage.setTitle("Library System");

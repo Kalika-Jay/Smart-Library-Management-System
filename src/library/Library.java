@@ -65,7 +65,7 @@ public class Library {
         return  books;
     }
 
-    public void getBooksByAuthor(String authorName) {
+    public List<String> getBooksByAuthor(String authorName) {
         List<String> books = new ArrayList<>();
         String query = "SELECT id,title,author FROM books WHERE author ILIKE ?";
 
@@ -97,6 +97,7 @@ public class Library {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+        return books;
     }
 
     public void getBooksByTitle(String titleName) {
@@ -184,7 +185,7 @@ public class Library {
         }
     }
 
-    public void getAllUsers(){
+    public List<String> getAllUsers(){
         List<String> users = new ArrayList<>();
         String query = "SELECT id,name,role FROM users";
         try (Connection conn =db.connect();
@@ -214,6 +215,7 @@ public class Library {
         } catch (Exception e) {
             System.out.println("Error retrieving users: " + e.getMessage());
         }
+        return users;
     }
 
 

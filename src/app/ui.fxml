@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="app.UIController" spacing="10" alignment="CENTER" prefWidth="400" prefHeight="300">
+    <Button text="Show Books" onAction="#getAllBooks" />
+    <Button text="Show Users" onAction="#getAllUsers" />
+    <Label text="Search Books by Author" />
+    <TextField fx:id="authorField" promptText="Enter author keyword" />
+    <Button text="Search" onAction="#onSearchClicked" />
+    <ListView fx:id="resultsList" prefHeight="200" />
+</VBox>
