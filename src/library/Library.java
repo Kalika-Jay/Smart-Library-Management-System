@@ -10,6 +10,10 @@ import database.db;
 
 public class Library {
 
+    private void space(){
+        System.out.println("--------------------------------------------------");
+    }
+
     public void addBook(Book book) {
         String sql = "INSERT INTO books(id, title, author) VALUES(?, ?, ?)";
 
@@ -27,7 +31,7 @@ public class Library {
         }
     }
 
-    public void getAllBooks() {
+    public List<String> getAllBooks() {
         List<String> books = new ArrayList<>();
         String query = "SELECT id, title, author FROM books";
 
@@ -43,18 +47,126 @@ public class Library {
                 books.add(id + ". " + title + " by " + author);
             }
             if (books.isEmpty()) {
+                space();
                 System.out.println("No books found in the library.");
+                space();
             } else {
+                space();
                 System.out.println("Books in the library:");
                 for (String book : books) {
                     System.out.println(book);
                 }
+                space();
             }
 
         } catch (Exception e) {
             System.out.println("Error retrieving books: " + e.getMessage());
         }
+        return  books;
     }
+
+    public void getBooksByAuthor(String authorName) {
+        List<String> books = new ArrayList<>();
+        String query = "SELECT id,title,author FROM books WHERE author ILIKE ?";
+
+        try (Connection conn = db.connect();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1,  "%" + authorName + "%");
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                String title = rs.getString("title");
+                int id = rs.getInt("id");
+                String author = rs.getString("author");
+                books.add("Id: "+id+" Title: "+title+" by "+author);
+            }
+
+            if (books.isEmpty()) {
+                space();
+                System.out.println("No books found by author: " + authorName);
+                space();
+            }else{
+                space();
+                System.out.println("Books by " + authorName + ":");
+                for (String book : books) {
+                    System.out.println(book);
+                }
+                space();
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    public void getBooksByTitle(String titleName) {
+        List<String> books = new ArrayList<>();
+        String query = "SELECT id,title,author FROM books WHERE title ILIKE ?";
+
+        try (Connection conn = db.connect();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1,  "%" + titleName + "%");
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                String title = rs.getString("title");
+                int id = rs.getInt("id");
+                String author = rs.getString("author");
+                books.add("Id: "+id+" Title: "+title+" by "+author);
+            }
+
+            if (books.isEmpty()) {
+                space();
+                System.out.println("No books found for the tittle keyword: " + titleName);
+                space();
+            }else{
+                space();
+                System.out.println("Books go with keyword " + titleName + ":");
+                for (String book : books) {
+                    System.out.println(book);
+                }
+                space();
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    public void getBooksById(int Id) {
+        List<String> books = new ArrayList<>();
+        String query = "SELECT id,title,author FROM books WHERE id = ?";
+
+        try (Connection conn = db.connect();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, Id);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                String title = rs.getString("title");
+                int id = rs.getInt("id");
+                String author = rs.getString("author");
+                books.add("Id: "+id+" Title: "+title+" by "+author);
+            }
+
+            if (books.isEmpty()) {
+                space();
+                System.out.println("No books found with the id: " + Id);
+                space();
+            }else{
+                space();
+                System.out.println("Book for id " + Id + ":");
+                for (String book : books) {
+                    System.out.println(book);
+                }
+                space();
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
 
     //users
     public void registerUser(User user){
@@ -87,19 +199,23 @@ public class Library {
                 users.add(id + ". " + name + " is a " + role);
             }
             if (users.isEmpty()) {
+                space();
                 System.out.println("No books found in the library.");
+                space();
             } else {
+                space();
                 System.out.println("Users of the library:");
                 for (String user: users) {
                     System.out.println(user);
                 }
+                space();
             }
 
         } catch (Exception e) {
             System.out.println("Error retrieving users: " + e.getMessage());
         }
-
     }
+
 
 //    public void showBooks(){
 //        for (Book book : books) {
