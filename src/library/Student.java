@@ -7,6 +7,6 @@ public class Student extends User{
 
     @Override
     public String getRole() {
-        return "library.Student";
+        return "Student";
     }
 }

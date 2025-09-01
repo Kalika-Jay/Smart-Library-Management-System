@@ -3,7 +3,9 @@ package app;
 import database.Tables;
 import database.db;
 import library.Book;
+import library.Librarian;
 import library.Library;
+import library.Student;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,8 +23,12 @@ public class Main {
 //        library.borrowBookByTitle("1984",1);
 //        library.borrowBookById(2,1);
         Library library = new Library();
-        library.addBook(new Book(1, "1984", "George Orwell",true));
-        library.addBook(new Book(2, "Madolduwa", "Martin Wikramasinghe",true));
+//        library.addBook(new Book(1, "1984", "George Orwell",true));
+//        library.addBook(new Book(2, "Madolduwa", "Martin Wikramasinghe",true));
+//        library.addBook(new Book(3, "To Kill a Mockingbird", "Harper Lee",true));
         library.getAllBooks();
+
+        library.registerUser(new Student(1,"Kalika Jayasinghe Arachchi"));
+        library.registerUser(new Librarian(2,"Kamal Perera"));
     }
 }

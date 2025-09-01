@@ -57,6 +57,22 @@ public class Library {
         return books;
     }
 
+    //users
+    public void registerUser(User user){
+        String sql = "INSERT INTO users(id,name,role) VALUES(?,?,?)";
+
+        try(Connection connection = db.connect();
+        PreparedStatement pstmnt = connection.prepareStatement(sql)){
+            pstmnt.setInt(1,user.getId());
+            pstmnt.setString(2,user.getName());
+            pstmnt.setString(3,user.getRole());
+            pstmnt.executeUpdate();
+            System.out.println("User registered successfully.");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 //    public void showBooks(){
 //        for (Book book : books) {
 //            System.out.println(book.getBookDetails());
