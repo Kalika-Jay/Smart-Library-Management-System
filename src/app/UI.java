@@ -26,8 +26,7 @@ public class UI extends Application {
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ui.fxml"));
         Parent root = loader.load();
-//        VBox root = new VBox(10, loadBooksButton, listView);
-        Scene scene = new Scene(root, 400, 300);
+        Scene scene = new Scene(root, 600, 600);
 
         primaryStage.setTitle("Library System");
         primaryStage.setScene(scene);

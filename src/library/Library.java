@@ -85,6 +85,7 @@ public class Library {
             if (books.isEmpty()) {
                 space();
                 System.out.println("No books found by author: " + authorName);
+                books.add("No books found by author: " + authorName);
                 space();
             }else{
                 space();
