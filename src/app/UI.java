@@ -26,10 +26,28 @@ public class UI extends Application {
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ui.fxml"));
         Parent root = loader.load();
-        Scene scene = new Scene(root, 600, 600);
 
-        primaryStage.setTitle("Library System");
+        // Create scene with minimum size
+        Scene scene = new Scene(root, 800, 600);
+
+        // Set up the stage for resizing
+        primaryStage.setTitle("Library Management System");
         primaryStage.setScene(scene);
+
+        // Set minimum window size to prevent UI from breaking
+        primaryStage.setMinWidth(600);
+        primaryStage.setMinHeight(500);
+
+        // Optional: Set maximum size if you want to limit how large it can get
+        // primaryStage.setMaxWidth(1200);
+        // primaryStage.setMaxHeight(900);
+
+        // Make the window resizable (this is true by default)
+        primaryStage.setResizable(true);
+
+        // Optional: Center the window on screen
+        primaryStage.centerOnScreen();
+
         primaryStage.show();
     }
 }
