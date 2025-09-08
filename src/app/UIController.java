@@ -5,10 +5,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import library.Book;
+import library.Librarian;
 import library.Library;
 import java.util.List;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import library.Student;
 
 public class UIController {
 
@@ -27,13 +29,53 @@ public class UIController {
     private AnchorPane hiddenArea1;
     @FXML
     private AnchorPane hiddenArea2;
-
+    @FXML
+    private AnchorPane hiddenArea3;
+    @FXML
+    private AnchorPane hiddenArea4;
     @FXML
     private Button toggleButton1;
     @FXML
     private Button toggleButton2;
+    @FXML
+    private Button toggleButton3;
+    @FXML
+    private Button toggleButton4;
+    @FXML
+    private TextField nameFieldS;
+    @FXML
+    private TextField roleField;
+    @FXML
+    private TextField uidFieldS;
+    @FXML
+    private TextField uidFieldL;
+    @FXML
+    private TextField nameFieldL;
 
     private final Library library = new Library();
+
+    // Helper method to hide all areas and reset button text
+    private void hideAllAreas() {
+        hiddenArea1.setVisible(false);
+        hiddenArea1.setManaged(false);
+        hiddenArea2.setVisible(false);
+        hiddenArea2.setManaged(false);
+        hiddenArea3.setVisible(false);
+        hiddenArea3.setManaged(false);
+        hiddenArea4.setVisible(false);
+        hiddenArea4.setManaged(false);
+
+        toggleButton1.setText("Search by Author");
+        toggleButton2.setText("Add book");
+        toggleButton3.setText("Add Student");
+        toggleButton4.setText("Add Librarian");
+    }
+
+    // Helper method to hide results list
+    private void hideResultsList() {
+        resultsList.setVisible(false);
+        resultsList.setManaged(false);
+    }
 
     @FXML
     private void onSearchClicked() {
@@ -46,12 +88,12 @@ public class UIController {
             resultsList.getItems().addAll(books);
         }
     }
+
     @FXML
     private void onAddBookClicked() {
-        hiddenArea1.setVisible(false);
-        hiddenArea1.setManaged(false);
-        resultsList.setVisible(false);
-        resultsList.setManaged(false);
+        hideAllAreas();
+        hideResultsList();
+
         String idText = idField.getText().trim();
         int id = Integer.parseInt(idText);
         String title = titleField.getText().trim();
@@ -65,19 +107,50 @@ public class UIController {
     }
 
     @FXML
+    private void onAddStudentClicked() {
+        hideAllAreas();
+        hideResultsList();
+
+        String uidText = uidFieldS.getText().trim();
+        int id = Integer.parseInt(uidText);
+        String name = nameFieldS.getText().trim();
+        if (!name.isEmpty() && !uidText.isEmpty()) {
+            library.registerUser(new Student(id, name));
+            uidFieldS.clear();
+            nameFieldS.clear();
+        }
+    }
+
+    @FXML
+    private void onAddLibrarianClicked() {
+        hideAllAreas();
+        hideResultsList();
+
+        String uidText = uidFieldL.getText().trim();
+        int id = Integer.parseInt(uidText);
+        String name = nameFieldL.getText().trim();
+        if (!name.isEmpty() && !uidText.isEmpty()) {
+            library.registerUser(new Librarian(id, name));
+            uidFieldL.clear();
+            nameFieldL.clear();
+        }
+    }
+
+    @FXML
     private void getAllBooks() {
-        hiddenArea1.setVisible(false);
-        hiddenArea1.setManaged(false);
+        hideAllAreas();
+
         resultsList.setVisible(true);
         resultsList.setManaged(true);
         resultsList.getItems().clear();
         List<String> books = library.getAllBooks();
         resultsList.getItems().addAll(books);
     }
+
     @FXML
     private void getAllUsers() {
-        hiddenArea1.setVisible(false);
-        hiddenArea1.setManaged(false);
+        hideAllAreas();
+
         resultsList.setVisible(true);
         resultsList.setManaged(true);
         resultsList.getItems().clear();
@@ -88,15 +161,80 @@ public class UIController {
     @FXML
     private void toggleArea1() {
         boolean currentlyVisible = hiddenArea1.isVisible();
-        hiddenArea1.setVisible(!currentlyVisible);
-        hiddenArea1.setManaged(!currentlyVisible);
-        toggleButton1.setText(currentlyVisible ? "Search by Author" : "Hide Area");
+
+        if (currentlyVisible) {
+            // If currently visible, just hide it
+            hiddenArea1.setVisible(false);
+            hiddenArea1.setManaged(false);
+            toggleButton1.setText("Search by Author");
+            hideResultsList();
+        } else {
+            // If currently hidden, hide all other areas first, then show this one
+            hideAllAreas();
+            hideResultsList();
+            hiddenArea1.setVisible(true);
+            hiddenArea1.setManaged(true);
+            toggleButton1.setText("Hide Area");
+        }
     }
+
     @FXML
-    private void toggleArea2() {
+    private void toggleAddBookArea() {
         boolean currentlyVisible = hiddenArea2.isVisible();
-        hiddenArea2.setVisible(!currentlyVisible);
-        hiddenArea2.setManaged(!currentlyVisible);
-        toggleButton2.setText(currentlyVisible ? "Add book" : "Hide Area");
+
+        if (currentlyVisible) {
+            // If currently visible, just hide it
+            hiddenArea2.setVisible(false);
+            hiddenArea2.setManaged(false);
+            toggleButton2.setText("Add book");
+            hideResultsList();
+        } else {
+            // If currently hidden, hide all other areas first, then show this one
+            hideAllAreas();
+            hideResultsList();
+            hiddenArea2.setVisible(true);
+            hiddenArea2.setManaged(true);
+            toggleButton2.setText("Hide Area");
+        }
+    }
+
+    @FXML
+    private void toggleAddStudentArea() {
+        boolean currentlyVisible = hiddenArea3.isVisible();
+
+        if (currentlyVisible) {
+            // If currently visible, just hide it
+            hiddenArea3.setVisible(false);
+            hiddenArea3.setManaged(false);
+            toggleButton3.setText("Add Student");
+            hideResultsList();
+        } else {
+            // If currently hidden, hide all other areas first, then show this one
+            hideAllAreas();
+            hideResultsList();
+            hiddenArea3.setVisible(true);
+            hiddenArea3.setManaged(true);
+            toggleButton3.setText("Hide Area");
+        }
+    }
+
+    @FXML
+    private void toggleAddLibrarianArea() {
+        boolean currentlyVisible = hiddenArea4.isVisible();
+
+        if (currentlyVisible) {
+            // If currently visible, just hide it
+            hiddenArea4.setVisible(false);
+            hiddenArea4.setManaged(false);
+            toggleButton4.setText("Add Librarian");
+            hideResultsList();
+        } else {
+            // If currently hidden, hide all other areas first, then show this one
+            hideAllAreas();
+            hideResultsList();
+            hiddenArea4.setVisible(true);
+            hiddenArea4.setManaged(true);
+            toggleButton4.setText("Hide Area");
+        }
     }
 }
