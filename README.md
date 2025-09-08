@@ -12,7 +12,6 @@ A comprehensive Java-based application designed to streamline and automate libra
 
 ### 👥 User Management
 - **User Registration**: Maintain comprehensive user profiles
-- **Borrowing History**: Track complete lending history for each user
 - **User Information**: Store and manage contact details and preferences
 
 ## 🛠️ Technologies Used
@@ -32,7 +31,6 @@ smart-library-management/
 │   ├── app/
 │   ├── database/
 │   ├── library/
-│   └── utils/
 ├── lib/
 └── README.md
 ```
