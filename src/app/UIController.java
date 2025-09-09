@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -13,8 +14,13 @@ import javafx.stage.Stage;
 import library.Book;
 import library.Librarian;
 import library.Library;
+import java.sql.Connection;
+import database.db;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -257,7 +263,35 @@ public class UIController {
         }
     }
     @FXML
-    private void onClickLogin() {
-
+    private Label loginStatusLabel;
+    @FXML
+    private TextField usernameField;
+    @FXML
+    private TextField passwordField;
+    @FXML
+    private void onClickLogin(ActionEvent event) {
+        if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+            loginStatusLabel.setText("Please enter both username and password.");
+        } else {
+            Connection conn = db.connect();
+            String verifyLogin = "SELECT count(1) FROM users WHERE name = '" + usernameField.getText() + "' AND password = '" + passwordField.getText() + "'";
+            try {
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(verifyLogin);
+                while(rs.next()) {
+                    if(rs.getInt(1)==1){
+                        loginStatusLabel.setText("Login successful!");
+                        switchScene(event);
+                    } else {
+                        loginStatusLabel.setText("Invalid credentials.");
+                    }
+                    break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }

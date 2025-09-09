@@ -1,16 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
+<?import javafx.scene.shape.Circle?>
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="app.UIController"
-            prefHeight="400.0" prefWidth="600.0">
-    <Button layoutX="250.0" layoutY="180.0" mnemonicParsing="false" onAction="#switchScene" text="Login" />
+            prefHeight="600.0" prefWidth="800.0"
+            style="-fx-background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+
+    <!-- Main Container -->
+    <VBox alignment="CENTER" layoutX="250.0" layoutY="150.0" prefHeight="300.0" prefWidth="300.0"
+          style="-fx-background-color: rgba(255, 255, 255, 0.95);
+                 -fx-background-radius: 20;
+                 -fx-padding: 40;
+                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 15, 0.3, 0, 5);">
+
+        <!-- Title -->
+        <Label text="Welcome Back" textAlignment="CENTER"
+               style="-fx-font-size: 28px;
+                      -fx-font-weight: bold;
+                      -fx-text-fill: #2c3e50;
+                      -fx-font-family: 'System';">
+            <VBox.margin>
+                <Insets bottom="30.0" />
+            </VBox.margin>
+        </Label>
+        <Label fx:id="loginStatusLabel" alignment="CENTER"></Label>
+
+        <!-- Username Field -->
+        <VBox spacing="8">
+            <Label text="Username"
+                   style="-fx-font-size: 14px;
+                          -fx-text-fill: #555;
+                          -fx-font-weight: 500;" />
+            <TextField fx:id="usernameField"
+                       promptText="Enter your username"
+                       prefHeight="45.0"
+                       style="-fx-background-color: #f8f9fa;
+                              -fx-border-color: #e9ecef;
+                              -fx-border-radius: 8;
+                              -fx-background-radius: 8;
+                              -fx-padding: 0 15 0 15;
+                              -fx-font-size: 14px;
+                              -fx-border-width: 2;">
+                <effect>
+                    <DropShadow color="rgba(0,0,0,0.1)" radius="3" offsetY="1" />
+                </effect>
+            </TextField>
+            <VBox.margin>
+                <Insets bottom="15.0" />
+            </VBox.margin>
+        </VBox>
+
+        <!-- Password Field -->
+        <VBox spacing="8">
+            <Label text="Password"
+                   style="-fx-font-size: 14px;
+                          -fx-text-fill: #555;
+                          -fx-font-weight: 500;" />
+            <PasswordField fx:id="passwordField"
+                           promptText="Enter your password"
+                           prefHeight="45.0"
+                           style="-fx-background-color: #f8f9fa;
+                                  -fx-border-color: #e9ecef;
+                                  -fx-border-radius: 8;
+                                  -fx-background-radius: 8;
+                                  -fx-padding: 0 15 0 15;
+                                  -fx-font-size: 14px;
+                                  -fx-border-width: 2;">
+                <effect>
+                    <DropShadow color="rgba(0,0,0,0.1)" radius="3" offsetY="1" />
+                </effect>
+            </PasswordField>
+            <VBox.margin>
+                <Insets bottom="20.0" />
+            </VBox.margin>
+        </VBox>
+
+        <!-- Login Button -->
+        <Button fx:id="loginButton"
+                text="Sign In"
+                prefHeight="50.0"
+                onAction="#onClickLogin"
+                prefWidth="220.0"
+                style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2);
+                       -fx-text-fill: white;
+                       -fx-font-size: 16px;
+                       -fx-font-weight: bold;
+                       -fx-background-radius: 25;
+                       -fx-border-radius: 25;
+                       -fx-cursor: hand;">
+            <effect>
+                <DropShadow color="rgba(102, 126, 234, 0.4)" radius="10" offsetY="3" />
+            </effect>
+            <VBox.margin>
+                <Insets bottom="15.0" />
+            </VBox.margin>
+        </Button>
+
+        <!-- Forgot Password Link -->
+        <Hyperlink text="Forgot Password?"
+                   style="-fx-text-fill: #667eea;
+                          -fx-font-size: 13px;
+                          -fx-border-color: transparent;" />
+
+    </VBox>
+
+    <!-- Footer Text -->
+    <Label text="Don't have an account? Sign up here"
+           layoutX="275.0" layoutY="500.0"
+           style="-fx-text-fill: rgba(255,255,255,0.8);
+                  -fx-font-size: 13px;" />
+
+    <!-- Decorative Elements -->
+    <Circle centerX="150.0" centerY="100.0" radius="60.0"
+            fill="rgba(255,255,255,0.1)" />
+    <Circle centerX="650.0" centerY="500.0" radius="80.0"
+            fill="rgba(255,255,255,0.08)" />
 
 </AnchorPane>
