@@ -1,18 +1,37 @@
 package app;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import library.Book;
 import library.Librarian;
 import library.Library;
+
+import java.io.IOException;
 import java.util.List;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import library.Student;
 
 public class UIController {
+    private Stage primaryStage;
+    private Scene scene;
+    private Parent root;
+
+    public void switchScene(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("ui.fxml"));
+        primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
 
     @FXML
     private TextField authorField;
@@ -236,5 +255,9 @@ public class UIController {
             hiddenArea4.setManaged(true);
             toggleButton4.setText("Hide Area");
         }
+    }
+    @FXML
+    private void onClickLogin() {
+
     }
 }

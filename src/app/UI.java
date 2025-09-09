@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import library.Library;
@@ -24,15 +25,19 @@ public class UI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ui.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
         Parent root = loader.load();
 
+
         // Create scene with minimum size
-        Scene scene = new Scene(root, 800, 600);
+        Scene login = new Scene(root,800,600);
+//        Scene scene = new Scene(root, 800, 600);
 
         // Set up the stage for resizing
         primaryStage.setTitle("Library Management System");
-        primaryStage.setScene(scene);
+        Image icon = new Image(getClass().getResourceAsStream("Library.png"));
+        primaryStage.getIcons().add(icon);
+        primaryStage.setScene(login);
 
         // Set minimum window size to prevent UI from breaking
         primaryStage.setMinWidth(600);

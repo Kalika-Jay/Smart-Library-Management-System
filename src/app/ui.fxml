@@ -15,7 +15,7 @@
     <children>
 
         <!-- Header Section -->
-        <VBox layoutX="0.0" layoutY="0.0" prefHeight="80.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2); -fx-padding: 15;">
+        <VBox layoutX="0.0" layoutY="0.0" prefHeight="80.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right, #081e62, #c2bdbd); -fx-padding: 15;">
             <children>
                 <Label alignment="CENTER" prefWidth="770.0" text="Library Management System" textFill="WHITE">
                     <font>
