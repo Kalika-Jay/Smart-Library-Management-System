@@ -294,4 +294,15 @@
             </padding>
         </VBox>
     </children>
+    <Label fx:id="welcomeLabel" layoutX="30.0" layoutY="50.0" textFill="WHITE">
+        <font>
+            <Font name="System Bold" size="16.0" />
+        </font>
+    </Label>
+    <Button fx:id="logOutButton" layoutX="650.0" layoutY="45.0" onAction="#onClickLogOut"
+            prefHeight="35.0" prefWidth="120.0" text="Log Out"
+            style="-fx-background-color: linear-gradient(to bottom, #e74c3c, #c0392b);
+               -fx-text-fill: white; -fx-background-radius: 8; -fx-cursor: hand;
+               -fx-font-size: 14px; -fx-font-weight: bold;
+               -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 3, 0, 0, 1);" />
 </AnchorPane>

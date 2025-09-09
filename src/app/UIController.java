@@ -31,8 +31,26 @@ public class UIController {
     private Scene scene;
     private Parent root;
 
-    public void switchScene(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("ui.fxml"));
+    @FXML
+    private Label welcomeLabel;
+
+    public void setWelcomeMessage(String username) {
+        welcomeLabel.setText("Welcome, " + username + "!");
+    }
+
+    @FXML
+    public void switchToUi(ActionEvent event,String username) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ui.fxml"));
+        Parent root = loader.load();
+        UIController controller = loader.getController();
+        controller.setWelcomeMessage(username);
+        primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+    public void switchTologin(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         primaryStage.setScene(scene);
@@ -76,6 +94,8 @@ public class UIController {
     private TextField uidFieldL;
     @FXML
     private TextField nameFieldL;
+    @FXML
+    private Label name;
 
     private final Library library = new Library();
 
@@ -268,6 +288,10 @@ public class UIController {
     private TextField usernameField;
     @FXML
     private TextField passwordField;
+//    @FXML
+//    private void displayName(String username) {
+//        name.setText("Welcome, " +username+ "!");
+//    }
     @FXML
     private void onClickLogin(ActionEvent event) {
         if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty()) {
@@ -281,7 +305,7 @@ public class UIController {
                 while(rs.next()) {
                     if(rs.getInt(1)==1){
                         loginStatusLabel.setText("Login successful!");
-                        switchScene(event);
+                        switchToUi(event,usernameField.getText());
                     } else {
                         loginStatusLabel.setText("Invalid credentials.");
                     }
@@ -294,4 +318,11 @@ public class UIController {
             }
         }
     }
+    @FXML
+    private Button logOutButton;
+    @FXML
+    private void onClickLogOut(ActionEvent event) throws IOException {
+        switchTologin(event);
+    }
+
 }
