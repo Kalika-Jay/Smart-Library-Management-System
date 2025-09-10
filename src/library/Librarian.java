@@ -1,8 +1,8 @@
 package library;
 
 public class Librarian extends User{
-    public Librarian(int id, String name) {
-        super(id, name);
+    public Librarian(String username, String password, String role) {
+        super(username, password, role);
     }
 
     @Override

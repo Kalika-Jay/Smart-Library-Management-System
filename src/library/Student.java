@@ -1,8 +1,8 @@
 package library;
 
 public class Student extends User{
-    public Student(int id, String name) {
-        super(id, name);
+    public Student(String fullName, String username, String password) {
+        super(fullName, username, password);
     }
 
     @Override

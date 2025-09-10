@@ -1,23 +1,20 @@
 package library;
 
 public abstract class User {
-    private int id;
-    private String name;
+    private String fullName;
+    private String userName;
+    private String password;
 
-    public User(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-    public int getId() {
-        return id;
+    public User(String fullName,String userName, String password) {
+        this.fullName = fullName;
+        this.userName = userName;
+        this.password = password;
     }
     public String getName() {
-        return name;
+        return fullName;
     }
+    public String getUserName() {return userName;}
+    public String getPassword() {return password;}
     public abstract String getRole();
 
-
-    public void displayUserInfo() {
-        System.out.println("library.User ID: " + id + ", Name: " + name + ", Role: " + getRole());
-    }
 }

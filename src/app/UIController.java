@@ -6,9 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import library.Book;
@@ -22,7 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
-import javafx.scene.control.Button;
+
 import javafx.scene.layout.VBox;
 import library.Student;
 
@@ -49,8 +47,17 @@ public class UIController {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    @FXML
     public void switchTologin(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+    @FXML
+    public void switchTosignup(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("signup.fxml"));
         primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         primaryStage.setScene(scene);
@@ -150,36 +157,37 @@ public class UIController {
             authorField2.clear();
         }
     }
-
     @FXML
-    private void onAddStudentClicked() {
-        hideAllAreas();
-        hideResultsList();
-
-        String uidText = uidFieldS.getText().trim();
-        int id = Integer.parseInt(uidText);
-        String name = nameFieldS.getText().trim();
-        if (!name.isEmpty() && !uidText.isEmpty()) {
-            library.registerUser(new Student(id, name));
-            uidFieldS.clear();
-            nameFieldS.clear();
+    private TextField userNameFieldS;
+    @FXML
+    private PasswordField passwordFieldS;
+    @FXML
+    private void onAddStudentClicked(ActionEvent event) throws IOException {
+        String fullname = nameFieldS.getText().trim();
+        String name = userNameFieldS.getText().trim();
+        String password = passwordFieldS.getText().trim();
+        if (!fullname.isEmpty() && !name.isEmpty() && !password.isEmpty()) {
+            library.registerUser(new Student(fullname, name, password));
+            switchToUi(event,name);
+        }else {
+            loginStatusLabel.setText("Signup Failed");
         }
     }
 
-    @FXML
-    private void onAddLibrarianClicked() {
-        hideAllAreas();
-        hideResultsList();
-
-        String uidText = uidFieldL.getText().trim();
-        int id = Integer.parseInt(uidText);
-        String name = nameFieldL.getText().trim();
-        if (!name.isEmpty() && !uidText.isEmpty()) {
-            library.registerUser(new Librarian(id, name));
-            uidFieldL.clear();
-            nameFieldL.clear();
-        }
-    }
+//    @FXML
+//    private void onAddLibrarianClicked() {
+//        hideAllAreas();
+//        hideResultsList();
+//
+//        String uidText = uidFieldL.getText().trim();
+//        int id = Integer.parseInt(uidText);
+//        String name = nameFieldL.getText().trim();
+//        if (!name.isEmpty() && !uidText.isEmpty()) {
+//            library.registerUser(new Librarian(fu));
+//            uidFieldL.clear();
+//            nameFieldL.clear();
+//        }
+//    }
 
     @FXML
     private void getAllBooks() {

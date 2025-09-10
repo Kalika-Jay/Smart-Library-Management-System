@@ -172,13 +172,14 @@ public class Library {
 
     //users
     public void registerUser(User user){
-        String sql = "INSERT INTO users(id,name,role) VALUES(?,?,?)";
+        String sql = "INSERT INTO users(fullname,username,role,password) VALUES(?,?,?,?)";
 
         try(Connection connection = db.connect();
         PreparedStatement pstmnt = connection.prepareStatement(sql)){
-            pstmnt.setInt(1,user.getId());
-            pstmnt.setString(2,user.getName());
+            pstmnt.setString(1,user.getName());
+            pstmnt.setString(2,user.getUserName());
             pstmnt.setString(3,user.getRole());
+            pstmnt.setString(4,user.getPassword());
             pstmnt.executeUpdate();
             System.out.println("User registered successfully.");
         }catch (Exception e){

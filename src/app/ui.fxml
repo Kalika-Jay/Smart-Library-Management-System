@@ -264,16 +264,6 @@
                                                      -fx-padding: 10; -fx-font-size: 13px;" />
                                             </children>
                                         </HBox>
-
-                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                            <children>
-                                                <Button onAction="#onAddLibrarianClicked" prefHeight="40.0" prefWidth="130.0"
-                                                        style="-fx-background-color: linear-gradient(to bottom, #a29bfe, #6c5ce7);
-                                                  -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;
-                                                  -fx-font-size: 14px; -fx-font-weight: bold;"
-                                                        text="Add Librarian" />
-                                            </children>
-                                        </HBox>
                                     </children>
                                 </VBox>
                             </children>
