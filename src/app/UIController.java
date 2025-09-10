@@ -167,8 +167,13 @@ public class UIController {
         String name = userNameFieldS.getText().trim();
         String password = passwordFieldS.getText().trim();
         if (!fullname.isEmpty() && !name.isEmpty() && !password.isEmpty()) {
-            library.registerUser(new Student(fullname, name, password));
-            switchToUi(event,name);
+            boolean message = library.registerUser(new Student(fullname, name, password));
+            if (message) {
+                loginStatusLabel.setText("User Registered Successfully");
+                switchToUi(event,name);
+            }else {
+                loginStatusLabel.setText("Username already exists");
+            }
         }else {
             loginStatusLabel.setText("Signup Failed");
         }

@@ -171,20 +171,37 @@ public class Library {
 
 
     //users
-    public void registerUser(User user){
-        String sql = "INSERT INTO users(fullname,username,role,password) VALUES(?,?,?,?)";
+    public boolean registerUser(User user){
+        String checkSql = "SELECT COUNT(*) FROM users WHERE username = ?";
+        String insertSql = "INSERT INTO users(fullname,username,role,password) VALUES(?,?,?,?)";
 
-        try(Connection connection = db.connect();
-        PreparedStatement pstmnt = connection.prepareStatement(sql)){
-            pstmnt.setString(1,user.getName());
-            pstmnt.setString(2,user.getUserName());
-            pstmnt.setString(3,user.getRole());
-            pstmnt.setString(4,user.getPassword());
-            pstmnt.executeUpdate();
-            System.out.println("User registered successfully.");
-        }catch (Exception e){
+        try(Connection connection = db.connect()) {
+
+            // Check if username exists
+            try (PreparedStatement checkStmt = connection.prepareStatement(checkSql)) {
+                checkStmt.setString(1, user.getUserName());
+                ResultSet rs = checkStmt.executeQuery();
+
+                if (rs.next() && rs.getInt(1) > 0) {
+                    System.out.println("Error: Username '" + user.getUserName() + "' already exists.");
+                    return false;
+                }
+            }
+
+            // Insert new user if username doesn't exist
+            try (PreparedStatement insertStmt = connection.prepareStatement(insertSql)) {
+                insertStmt.setString(1, user.getName());
+                insertStmt.setString(2, user.getUserName());
+                insertStmt.setString(3, user.getRole());
+                insertStmt.setString(4, user.getPassword());
+                insertStmt.executeUpdate();
+                System.out.println("User registered successfully.");
+            }
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        return true;
     }
 
     public List<String> getAllUsers(){
