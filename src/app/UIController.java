@@ -12,13 +12,12 @@ import javafx.stage.Stage;
 import library.Book;
 import library.Librarian;
 import library.Library;
-import java.sql.Connection;
+
+import java.sql.*;
+
 import database.db;
 
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 import javafx.scene.layout.VBox;
@@ -58,6 +57,14 @@ public class UIController {
     @FXML
     public void switchTosignup(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("signup.fxml"));
+        primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+    @FXML
+    public void switchToAdminLogin(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("adminlogin.fxml"));
         primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         primaryStage.setScene(scene);
@@ -112,15 +119,9 @@ public class UIController {
         hiddenArea1.setManaged(false);
         hiddenArea2.setVisible(false);
         hiddenArea2.setManaged(false);
-        hiddenArea3.setVisible(false);
-        hiddenArea3.setManaged(false);
-        hiddenArea4.setVisible(false);
-        hiddenArea4.setManaged(false);
 
         toggleButton1.setText("Search by Author");
         toggleButton2.setText("Add book");
-        toggleButton3.setText("Add Student");
-        toggleButton4.setText("Add Librarian");
     }
 
     // Helper method to hide results list
@@ -311,7 +312,7 @@ public class UIController {
             loginStatusLabel.setText("Please enter both username and password.");
         } else {
             Connection conn = db.connect();
-            String verifyLogin = "SELECT count(1) FROM users WHERE name = '" + usernameField.getText() + "' AND password = '" + passwordField.getText() + "'";
+            String verifyLogin = "SELECT count(1) FROM users WHERE username = '" + usernameField.getText() + "' AND password = '" + passwordField.getText() + "'";
             try {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(verifyLogin);
@@ -337,5 +338,32 @@ public class UIController {
     private void onClickLogOut(ActionEvent event) throws IOException {
         switchTologin(event);
     }
+    @FXML
+    private TextField librarianUsernameField;
+    @FXML
+    private TextField librarianPasswordField;
+    @FXML
+    private void librarianLogin(ActionEvent event) throws SQLException, IOException {
+        if (librarianUsernameField.getText().isEmpty() || librarianPasswordField.getText().isEmpty()) {
+            loginStatusLabel.setText("Please enter both username and password.");
+        } else {
+            Connection conn = db.connect();
+            String sql = "SELECT * FROM users WHERE username = ? AND password = ? AND role = 'Librarian'";
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, librarianUsernameField.getText().trim());
+            stmt.setString(2, librarianPasswordField.getText().trim());
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                loginStatusLabel.setText("Login successful!");
+                switchToUi(event, librarianUsernameField.getText());
+            } else {
+                loginStatusLabel.setText("Invalid credentials.");
+            }
+        }
+    }
+
 
 }

@@ -32,7 +32,7 @@
                      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 15, 0.3, 0, 5);">
 
             <!-- Title -->
-            <Label text="Welcome Back" textAlignment="CENTER"
+            <Label text="Admin Login" textAlignment="CENTER"
                    style="-fx-font-size: 28px;
                           -fx-font-weight: bold;
                           -fx-text-fill: #2c3e50;
@@ -56,7 +56,7 @@
                        style="-fx-font-size: 14px;
                               -fx-text-fill: #555;
                               -fx-font-weight: 500;" />
-                <TextField fx:id="usernameField"
+                <TextField fx:id="librarianUsernameField"
                            promptText="Enter your username"
                            prefHeight="45.0"
                            style="-fx-background-color: #f8f9fa;
@@ -81,7 +81,7 @@
                        style="-fx-font-size: 14px;
                               -fx-text-fill: #555;
                               -fx-font-weight: 500;" />
-                <PasswordField fx:id="passwordField"
+                <PasswordField fx:id="librarianPasswordField"
                                promptText="Enter your password"
                                prefHeight="45.0"
                                style="-fx-background-color: #f8f9fa;
@@ -104,7 +104,7 @@
             <Button fx:id="loginButton"
                     text="Sign In"
                     prefHeight="50.0"
-                    onAction="#onClickLogin"
+                    onAction="#librarianLogin"
                     prefWidth="220.0"
                     style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2);
                            -fx-text-fill: white;
@@ -121,37 +121,14 @@
                 </VBox.margin>
             </Button>
 
-            <!-- Forgot Password Link -->
-            <Hyperlink text="Forgot Password?"
-                       style="-fx-text-fill: #667eea;
-                              -fx-font-size: 13px;
-                              -fx-border-color: transparent;" />
-
         </VBox>
 
         <!-- Footer Section -->
         <VBox alignment="CENTER" spacing="10">
-            <Label text="Don't have an account? Sign up here"
-                   style="-fx-text-fill: #2c3e50;
-                          -fx-font-size: 13px;
-                          -fx-font-weight: 500;" />
-            <Button onAction="#switchTosignup"
-                    text="Sign Up"
+            <Button onAction="#switchTologin"
+                    text="Student Login"
                     prefHeight="35.0"
                     prefWidth="100.0"
-                    style="-fx-background-color: transparent;
-                           -fx-text-fill: #667eea;
-                           -fx-font-size: 14px;
-                           -fx-font-weight: bold;
-                           -fx-background-radius: 18;
-                           -fx-border-color: #667eea;
-                           -fx-border-radius: 18;
-                           -fx-border-width: 2;
-                           -fx-cursor: hand;" />
-            <Button onAction="#switchToAdminLogin"
-                    text="Admin Login"
-                    prefHeight="35.0"
-                    prefWidth="140"
                     style="-fx-background-color: transparent;
                            -fx-text-fill: #667eea;
                            -fx-font-size: 14px;

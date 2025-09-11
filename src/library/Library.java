@@ -206,14 +206,14 @@ public class Library {
 
     public List<String> getAllUsers(){
         List<String> users = new ArrayList<>();
-        String query = "SELECT id,name,role FROM users";
+        String query = "SELECT id,fullname,role FROM users";
         try (Connection conn =db.connect();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String name = rs.getString("name");
+                String name = rs.getString("fullname");
                 String role = rs.getString("role");
 
                 users.add(id + ". " + name + " is a " + role);
