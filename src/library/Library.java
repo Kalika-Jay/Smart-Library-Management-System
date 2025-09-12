@@ -101,7 +101,7 @@ public class Library {
         return books;
     }
 
-    public void getBooksByTitle(String titleName) {
+    public List<String> getBooksByTitle(String titleName) {
         List<String> books = new ArrayList<>();
         String query = "SELECT id,title,author FROM books WHERE title ILIKE ?";
 
@@ -133,9 +133,10 @@ public class Library {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+        return books;
     }
 
-    public void getBooksById(int Id) {
+    public List<String> getBooksById(int Id) {
         List<String> books = new ArrayList<>();
         String query = "SELECT id,title,author FROM books WHERE id = ?";
 
@@ -167,6 +168,7 @@ public class Library {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+        return books;
     }
 
 

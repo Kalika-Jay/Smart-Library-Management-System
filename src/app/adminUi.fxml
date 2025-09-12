@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.PasswordField?>
 <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom, #f8f9fa, #e9ecef);" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.UIController">
     <children>
 
@@ -76,17 +77,23 @@
                                        -fx-text-fill: white; -fx-background-radius: 12; -fx-cursor: hand;
                                        -fx-font-size: 13px; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 4, 0, 0, 2);"
                                         text="Search by Author" />
-                                <Button fx:id="toggleButton5" onAction="#toggleSearchByTitle" prefHeight="45.0" prefWidth="140.0"
-                                        style="-fx-background-color: linear-gradient(to bottom, #ff6b6b, #ee5a52);
-                                       -fx-text-fill: white; -fx-background-radius: 12; -fx-cursor: hand;
-                                       -fx-font-size: 13px; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 4, 0, 0, 2);"
-                                        text="Search by Title" />
 
                                 <Button fx:id="toggleButton2" onAction="#toggleAddBookArea" prefHeight="45.0" prefWidth="120.0"
                                         style="-fx-background-color: linear-gradient(to bottom, #4ecdc4, #44a08d);
                                        -fx-text-fill: white; -fx-background-radius: 12; -fx-cursor: hand;
                                        -fx-font-size: 13px; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 4, 0, 0, 2);"
                                         text="Add Book" />
+                                <Button fx:id="toggleButton3" onAction="#toggleAddStudentArea" prefHeight="45.0" prefWidth="120.0"
+                                        style="-fx-background-color: linear-gradient(to bottom, #ffa726, #fb8c00);
+                                       -fx-text-fill: white; -fx-background-radius: 12; -fx-cursor: hand;
+                                       -fx-font-size: 13px; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 4, 0, 0, 2);"
+                                        text="Add Student" />
+
+                                <Button fx:id="toggleButton4" onAction="#toggleAddLibrarianArea" prefHeight="45.0" prefWidth="130.0"
+                                        style="-fx-background-color: linear-gradient(to bottom, #ab47bc, #8e24aa);
+                                       -fx-text-fill: white; -fx-background-radius: 12; -fx-cursor: hand;
+                                       -fx-font-size: 13px; -fx-font-weight: bold; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 4, 0, 0, 2);"
+                                        text="Add Librarian" />
                             </children>
                         </HBox>
                     </children>
@@ -119,41 +126,7 @@
 
                                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                                             <children>
-                                                <Button onAction="#searchByAuthor" prefHeight="40.0" prefWidth="100.0"
-                                                        style="-fx-background-color: linear-gradient(to bottom, #6c5ce7, #5f3dc4);
-                                                  -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;
-                                                  -fx-font-size: 14px; -fx-font-weight: bold;"
-                                                        text="Search" />
-                                            </children>
-                                        </HBox>
-                                    </children>
-                                </VBox>
-                            </children>
-                        </AnchorPane>
-
-                        <AnchorPane fx:id="hiddenArea5" managed="false" prefHeight="160.0" prefWidth="740.0"
-                                    style="-fx-background-color: #ffffff; -fx-background-radius: 15;
-                                    -fx-border-color: #e9ecef; -fx-border-radius: 15; -fx-border-width: 2;
-                                    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 8, 0, 0, 3);"
-                                    visible="false">
-                            <children>
-                                <VBox layoutX="30.0" layoutY="20.0" prefWidth="680.0" spacing="15.0">
-                                    <children>
-                                        <Label text="🔍 Search Books by Author" textFill="#495057">
-                                            <font>
-                                                <Font name="System Bold" size="20.0" />
-                                            </font>
-                                        </Label>
-
-                                        <TextField fx:id="authorFieldN" prefHeight="45.0" prefWidth="680.0"
-                                                   promptText="Enter author name or keyword..."
-                                                   style="-fx-background-color: #f8f9fa; -fx-background-radius: 10;
-                                               -fx-border-color: #dee2e6; -fx-border-radius: 10; -fx-border-width: 1;
-                                               -fx-padding: 12; -fx-font-size: 14px;" />
-
-                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                            <children>
-                                                <Button onAction="#searchByTitle" prefHeight="40.0" prefWidth="100.0"
+                                                <Button onAction="#onSearchClicked" prefHeight="40.0" prefWidth="100.0"
                                                         style="-fx-background-color: linear-gradient(to bottom, #6c5ce7, #5f3dc4);
                                                   -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;
                                                   -fx-font-size: 14px; -fx-font-weight: bold;"
@@ -209,6 +182,100 @@
                                                   -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;
                                                   -fx-font-size: 14px; -fx-font-weight: bold;"
                                                         text="Add Book" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                        <!-- Add Student Area -->
+                        <AnchorPane fx:id="hiddenArea3" managed="false" prefHeight="160.0" prefWidth="740.0"
+                                    style="-fx-background-color: #ffffff; -fx-background-radius: 15;
+                                    -fx-border-color: #e9ecef; -fx-border-radius: 15; -fx-border-width: 2;
+                                    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 8, 0, 0, 3);"
+                                    visible="false">
+                            <children>
+                                <VBox layoutX="30.0" layoutY="20.0" prefWidth="680.0" spacing="15.0">
+                                    <children>
+                                        <Label text="👨‍🎓 Add New Student" textFill="#495057">
+                                            <font>
+                                                <Font name="System Bold" size="20.0" />
+                                            </font>
+                                        </Label>
+
+                                        <HBox spacing="15.0">
+                                            <children>
+                                                <TextField fx:id="uidFieldS" prefHeight="40.0" prefWidth="150.0"
+                                                           promptText="Student ID"
+                                                           style="-fx-background-color: #f8f9fa; -fx-background-radius: 8;
+                                                     -fx-border-color: #dee2e6; -fx-border-radius: 8; -fx-border-width: 1;
+                                                     -fx-padding: 10; -fx-font-size: 13px;" />
+
+                                                <TextField fx:id="nameFieldS" prefHeight="40.0" prefWidth="300.0"
+                                                           promptText="Student Name"
+                                                           style="-fx-background-color: #f8f9fa; -fx-background-radius: 8;
+                                                     -fx-border-color: #dee2e6; -fx-border-radius: 8; -fx-border-width: 1;
+                                                     -fx-padding: 10; -fx-font-size: 13px;" />
+                                            </children>
+                                        </HBox>
+
+                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                            <children>
+                                                <Button onAction="#onAddStudentClicked" prefHeight="40.0" prefWidth="120.0"
+                                                        style="-fx-background-color: linear-gradient(to bottom, #fdcb6e, #e17055);
+                                                  -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;
+                                                  -fx-font-size: 14px; -fx-font-weight: bold;"
+                                                        text="Add Student" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+
+                        <!-- Add Librarian Area -->
+                        <AnchorPane fx:id="hiddenArea4" managed="false" prefHeight="160.0" prefWidth="740.0"
+                                    style="-fx-background-color: #ffffff; -fx-background-radius: 15;
+                                    -fx-border-color: #e9ecef; -fx-border-radius: 15; -fx-border-width: 2;
+                                    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 8, 0, 0, 3);"
+                                    visible="false">
+                            <children>
+                                <VBox layoutX="30.0" layoutY="20.0" prefWidth="680.0" spacing="15.0">
+                                    <children>
+                                        <Label text="👩‍💼 Add New Librarian" textFill="#495057">
+                                            <font>
+                                                <Font name="System Bold" size="20.0" />
+                                            </font>
+                                        </Label>
+
+                                        <HBox spacing="15.0">
+                                            <children>
+                                                <TextField fx:id="nameFieldL" prefHeight="40.0" prefWidth="150.0"
+                                                           promptText="Librarian ID"
+                                                           style="-fx-background-color: #f8f9fa; -fx-background-radius: 8;
+                                                     -fx-border-color: #dee2e6; -fx-border-radius: 8; -fx-border-width: 1;
+                                                     -fx-padding: 10; -fx-font-size: 13px;" />
+
+                                                <TextField fx:id="userNameFieldL" prefHeight="40.0" prefWidth="300.0"
+                                                           promptText="Librarian Name"
+                                                           style="-fx-background-color: #f8f9fa; -fx-background-radius: 8;
+                                                     -fx-border-color: #dee2e6; -fx-border-radius: 8; -fx-border-width: 1;
+                                                     -fx-padding: 10; -fx-font-size: 13px;" />
+                                                <PasswordField fx:id="passwordFieldL" prefHeight="40.0" prefWidth="300.0"
+                                                           promptText="Librarian Name"
+                                                           style="-fx-background-color: #f8f9fa; -fx-background-radius: 8;
+                                                     -fx-border-color: #dee2e6; -fx-border-radius: 8; -fx-border-width: 1;
+                                                     -fx-padding: 10; -fx-font-size: 13px;" />
+                                            </children>
+                                        </HBox>
+
+                                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                                            <children>
+                                                <Button onAction="#onAddLibrarianClicked" prefHeight="40.0" prefWidth="130.0"
+                                                        style="-fx-background-color: linear-gradient(to bottom, #a29bfe, #6c5ce7);
+                                                  -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;
+                                                  -fx-font-size: 14px; -fx-font-weight: bold;"
+                                                        text="Add Librarian" />
                                             </children>
                                         </HBox>
                                     </children>

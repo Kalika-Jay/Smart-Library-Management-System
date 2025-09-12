@@ -20,7 +20,6 @@ import database.db;
 import java.io.IOException;
 import java.util.List;
 
-import javafx.scene.layout.VBox;
 import library.Student;
 
 public class UIController {
@@ -38,6 +37,17 @@ public class UIController {
     @FXML
     public void switchToUi(ActionEvent event,String username) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ui.fxml"));
+        Parent root = loader.load();
+        UIController controller = loader.getController();
+        controller.setWelcomeMessage(username);
+        primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+    @FXML
+    public void switchToAdminUi(ActionEvent event,String username) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("adminUi.fxml"));
         Parent root = loader.load();
         UIController controller = loader.getController();
         controller.setWelcomeMessage(username);
@@ -91,6 +101,8 @@ public class UIController {
     @FXML
     private AnchorPane hiddenArea4;
     @FXML
+    private AnchorPane hiddenArea5;
+    @FXML
     private Button toggleButton1;
     @FXML
     private Button toggleButton2;
@@ -98,6 +110,8 @@ public class UIController {
     private Button toggleButton3;
     @FXML
     private Button toggleButton4;
+    @FXML
+    private Button toggleButton5;
     @FXML
     private TextField nameFieldS;
     @FXML
@@ -115,13 +129,32 @@ public class UIController {
 
     // Helper method to hide all areas and reset button text
     private void hideAllAreas() {
-        hiddenArea1.setVisible(false);
-        hiddenArea1.setManaged(false);
-        hiddenArea2.setVisible(false);
-        hiddenArea2.setManaged(false);
+        if (hiddenArea1 != null) {
+            hiddenArea1.setVisible(false);
+            hiddenArea1.setManaged(false);
+        }
+        if (hiddenArea2 != null) {
+            hiddenArea2.setVisible(false);
+            hiddenArea2.setManaged(false);
+        }
+        if (hiddenArea3 != null) {
+            hiddenArea3.setVisible(false);
+            hiddenArea3.setManaged(false);
+        }
+        if (hiddenArea4 != null) {
+            hiddenArea4.setVisible(false);
+            hiddenArea4.setManaged(false);
+        }
+        if (hiddenArea5 != null) {
+            hiddenArea5.setVisible(false);
+            hiddenArea5.setManaged(false);
+        }
 
-        toggleButton1.setText("Search by Author");
-        toggleButton2.setText("Add book");
+        if (toggleButton1 != null) toggleButton1.setText("Search by Author");
+        if (toggleButton2 != null) toggleButton2.setText("Add book");
+        if (toggleButton3 != null) toggleButton3.setText("Add Student");
+        if (toggleButton4 != null) toggleButton4.setText("Add Librarian");
+        if (toggleButton5 != null) toggleButton5.setText("Search by Name");
     }
 
     // Helper method to hide results list
@@ -138,6 +171,30 @@ public class UIController {
         if (!keyword.isEmpty()) {
             resultsList.getItems().clear();
             List<String> books = library.getBooksByAuthor(keyword);
+            resultsList.getItems().addAll(books);
+        }
+    }
+    @FXML
+    private TextField authorFieldN;
+    @FXML
+    private void searchByAuthor() {
+        resultsList.setVisible(true);
+        resultsList.setManaged(true);
+        String keyword = authorField.getText().trim();
+        if (!keyword.isEmpty()) {
+            resultsList.getItems().clear();
+            List<String> books = library.getBooksByAuthor(keyword);
+            resultsList.getItems().addAll(books);
+        }
+    }
+    @FXML
+    private void searchByTitle() {
+        resultsList.setVisible(true);
+        resultsList.setManaged(true);
+        String keyword = authorFieldN.getText().trim();
+        if (!keyword.isEmpty()) {
+            resultsList.getItems().clear();
+            List<String> books = library.getBooksByTitle(keyword);
             resultsList.getItems().addAll(books);
         }
     }
@@ -179,21 +236,22 @@ public class UIController {
             loginStatusLabel.setText("Signup Failed");
         }
     }
-
-//    @FXML
-//    private void onAddLibrarianClicked() {
-//        hideAllAreas();
-//        hideResultsList();
-//
-//        String uidText = uidFieldL.getText().trim();
-//        int id = Integer.parseInt(uidText);
-//        String name = nameFieldL.getText().trim();
-//        if (!name.isEmpty() && !uidText.isEmpty()) {
-//            library.registerUser(new Librarian(fu));
-//            uidFieldL.clear();
-//            nameFieldL.clear();
-//        }
-//    }
+    @FXML
+    private TextField userNameFieldL;
+    @FXML
+    private PasswordField passwordFieldL;
+    @FXML
+    private void onAddLibrarianClicked() {
+        String name = nameFieldL.getText().trim();
+        String username = userNameFieldL.getText().trim();
+        String password = passwordFieldL.getText().trim();
+        if (!name.isEmpty() && !username.isEmpty() && !password.isEmpty()) {
+            library.registerUser(new Librarian(name,username,password));
+            nameFieldL.clear();
+            passwordFieldL.clear();
+            userNameFieldL.clear();
+        }
+    }
 
     @FXML
     private void getAllBooks() {
@@ -234,6 +292,22 @@ public class UIController {
             hiddenArea1.setVisible(true);
             hiddenArea1.setManaged(true);
             toggleButton1.setText("Hide Area");
+        }
+    }
+    @FXML
+    private void toggleSearchByTitle() {
+        boolean currentlyVisible = hiddenArea5.isVisible();
+        if (currentlyVisible) {
+            hiddenArea5.setVisible(false);
+            hiddenArea5.setManaged(false);
+            toggleButton5.setText("Search by Title");
+            hideResultsList();
+        }else{
+            hideAllAreas();
+            hideResultsList();
+            hiddenArea5.setVisible(true);
+            hiddenArea5.setManaged(true);
+            toggleButton5.setText("Hide Area");
         }
     }
 
@@ -358,12 +432,11 @@ public class UIController {
 
             if (rs.next()) {
                 loginStatusLabel.setText("Login successful!");
-                switchToUi(event, librarianUsernameField.getText());
+                switchToAdminUi(event, librarianUsernameField.getText());
             } else {
                 loginStatusLabel.setText("Invalid credentials.");
             }
         }
     }
-
 
 }
