@@ -1,11 +1,9 @@
 package library;
 
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+
 import database.db;
 
 public class Library {
@@ -33,7 +31,7 @@ public class Library {
 
     public List<String> getAllBooks() {
         List<String> books = new ArrayList<>();
-        String query = "SELECT id, title, author FROM books";
+        String query = "SELECT id, title, author,is_available FROM books";
 
         try (Connection conn =db.connect();
              Statement stmt = conn.createStatement();
@@ -43,8 +41,9 @@ public class Library {
                 int id = rs.getInt("id");
                 String title = rs.getString("title");
                 String author = rs.getString("author");
+                boolean available = rs.getBoolean("is_available");
 
-                books.add(id + ". " + title + " by " + author);
+                books.add("Id: "+id+" Title: "+title+" by "+author+" --- "+available);
             }
             if (books.isEmpty()) {
                 space();
@@ -67,7 +66,7 @@ public class Library {
 
     public List<String> getBooksByAuthor(String authorName) {
         List<String> books = new ArrayList<>();
-        String query = "SELECT id,title,author FROM books WHERE author ILIKE ?";
+        String query = "SELECT id,title,author,is_available FROM books WHERE author ILIKE ?";
 
         try (Connection conn = db.connect();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -79,7 +78,8 @@ public class Library {
                 String title = rs.getString("title");
                 int id = rs.getInt("id");
                 String author = rs.getString("author");
-                books.add("Id: "+id+" Title: "+title+" by "+author);
+                boolean available = rs.getBoolean("is_available");
+                books.add("Id: "+id+" Title: "+title+" by "+author+" --- "+available);
             }
 
             if (books.isEmpty()) {
@@ -103,7 +103,7 @@ public class Library {
 
     public List<String> getBooksByTitle(String titleName) {
         List<String> books = new ArrayList<>();
-        String query = "SELECT id,title,author FROM books WHERE title ILIKE ?";
+        String query = "SELECT id,title,author,is_available FROM books WHERE title ILIKE ?";
 
         try (Connection conn = db.connect();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -115,7 +115,8 @@ public class Library {
                 String title = rs.getString("title");
                 int id = rs.getInt("id");
                 String author = rs.getString("author");
-                books.add("Id: "+id+" Title: "+title+" by "+author);
+                boolean available = rs.getBoolean("is_available");
+                books.add("Id: "+id+" Title: "+title+" by "+author+" --- "+available);
             }
 
             if (books.isEmpty()) {
@@ -138,7 +139,7 @@ public class Library {
 
     public List<String> getBooksById(int Id) {
         List<String> books = new ArrayList<>();
-        String query = "SELECT id,title,author FROM books WHERE id = ?";
+        String query = "SELECT id,title,author,is_available FROM books WHERE id = ?";
 
         try (Connection conn = db.connect();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
@@ -150,7 +151,8 @@ public class Library {
                 String title = rs.getString("title");
                 int id = rs.getInt("id");
                 String author = rs.getString("author");
-                books.add("Id: "+id+" Title: "+title+" by "+author);
+                boolean available = rs.getBoolean("is_available");
+                books.add("Id: "+id+" Title: "+title+" by "+author+" --- "+available);
             }
 
             if (books.isEmpty()) {
@@ -293,16 +295,27 @@ public class Library {
 //        }
 //    }
 //
-//    public void borrowBookByTitle(String keyword,int userId) {
-//        for (Book book: books){
-//            if(book.getBookName().toLowerCase().equals(keyword.toLowerCase())&& book.isAvailable()){
-//                book.unmarkAvailable();
-//                System.out.println(getNameAndIdById(userId) +" has borrowed: " + book.getBookDetails());
-//                return;
-//            }
-//        }
-//        System.out.println("No books found with the given title.");
-//    }
+    public String borrowBookById(String id) throws SQLException {
+        Connection conn = db.connect();
+        String searchQuery = "SELECT * FROM books WHERE id = "+id;
+        String updateQuery = "UPDATE books SET is_available = false WHERE id = ?";
+
+        Statement searchStmt = conn.prepareStatement(searchQuery);
+        PreparedStatement updateStmt = conn.prepareStatement(updateQuery);
+        updateStmt.setString(1, id);
+
+        ResultSet rs1 = searchStmt.executeQuery(searchQuery);
+
+        while (rs1.next()) {
+            if (!rs1.getBoolean("is_available")) {
+                System.out.println("Error: Book with id " + id + " not found.");
+                return "Error: Book with id " + id + " not found.";
+            }else{
+                updateStmt.executeQuery();
+            }
+        }
+        return "Book with id " + id + " has been borrowed successfully";
+    }
 //
 //    public void borrowBookById(int id,int userId) {
 //        for (Book book: books){

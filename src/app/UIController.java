@@ -439,4 +439,13 @@ public class UIController {
         }
     }
 
+    @FXML
+    private TextField bookIdField;
+    @FXML
+    private void borrowBookByIdButton() throws SQLException {
+        if (bookIdField.getText().isEmpty()) {
+            library.borrowBookById(bookIdField.getText().trim());
+        }
+    }
+
 }
