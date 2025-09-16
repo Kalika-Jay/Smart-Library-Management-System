@@ -108,6 +108,8 @@ public class UIController {
     @FXML
     private AnchorPane hiddenArea6;
     @FXML
+    private AnchorPane hiddenArea7;
+    @FXML
     private Button toggleButton1;
     @FXML
     private Button toggleButton2;
@@ -119,6 +121,8 @@ public class UIController {
     private Button toggleButton5;
     @FXML
     private Button toggleButton6;
+    @FXML
+    private Button toggleButton7;
     @FXML
     private TextField nameFieldS;
     @FXML
@@ -160,13 +164,17 @@ public class UIController {
             hiddenArea6.setVisible(false);
             hiddenArea6.setManaged(false);
         }
-
+        if(hiddenArea7 != null) {
+            hiddenArea7.setVisible(false);
+            hiddenArea7.setManaged(false);
+        }
         if (toggleButton1 != null) toggleButton1.setText("Search by Author");
         if (toggleButton2 != null) toggleButton2.setText("Add book");
         if (toggleButton3 != null) toggleButton3.setText("Add Student");
         if (toggleButton4 != null) toggleButton4.setText("Add Librarian");
         if (toggleButton5 != null) toggleButton5.setText("Search by Name");
         if (toggleButton6 != null) toggleButton6.setText("Borrow Book");
+        if (toggleButton7 != null) toggleButton7.setText("Return Book");
     }
 
     // Helper method to hide results list
@@ -402,6 +410,25 @@ public class UIController {
         }
     }
     @FXML
+    private void toggleReturnBook() {
+        boolean currentlyVisible = hiddenArea7.isVisible();
+
+        if (currentlyVisible) {
+            // If currently visible, just hide it
+            hiddenArea7.setVisible(false);
+            hiddenArea7.setManaged(false);
+            toggleButton7.setText("Return Book");
+            hideResultsList();
+        } else {
+            // If currently hidden, hide all other areas first, then show this one
+            hideAllAreas();
+            hideResultsList();
+            hiddenArea7.setVisible(true);
+            hiddenArea7.setManaged(true);
+            toggleButton7.setText("Hide Area");
+        }
+    }
+    @FXML
     private Label loginStatusLabel;
     @FXML
     private TextField usernameField;
@@ -476,15 +503,37 @@ public class UIController {
     private void borrowBookByIdButton() throws SQLException {
         String text = bookIdField.getText().trim();
         if (text.isEmpty()) {
-            System.out.println("Please enter a Book ID.");
+            StatusLabel.setText("⚠️ Please enter a Book ID.");
             return;
         }
         try {
             int bookId = Integer.parseInt(text);
             String result = library.borrowBookById(bookId,loggedInUsername);
-            System.out.println(result+"by"+loggedInUsername);
+            StatusLabel.setText(result);
+            bookIdField.clear();
         } catch (NumberFormatException e) {
-            System.out.println("Invalid input! Please enter a valid numeric Book ID.");
+            StatusLabel.setText("❌ Invalid input! Please enter a valid numeric Book ID.");
+        }
+    }
+    @FXML
+    private TextField returnBookIdField;
+    @FXML
+    private Label StatusLabel;
+
+    @FXML
+    private void returnBookByIdButton() throws SQLException {
+        String text = returnBookIdField.getText().trim();
+        if (text.isEmpty()) {
+            StatusLabel.setText("⚠️ Please enter a Book ID.");
+            return;
+        }
+        try {
+            int bookId = Integer.parseInt(text);
+            String result = library.returnBookById(bookId, loggedInUsername);
+            StatusLabel.setText(result);
+            returnBookIdField.clear();
+        } catch (NumberFormatException e) {
+            StatusLabel.setText("❌ Invalid input! Please enter a valid numeric Book ID.");
         }
     }
 

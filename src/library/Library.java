@@ -342,6 +342,47 @@ public String borrowBookById(int id,String username) throws SQLException {
     }
 }
 
+    public String returnBookById(int id, String username) throws SQLException {
+        String searchQuery = "SELECT is_available, borrowed_by FROM books WHERE id = ?";
+        String updateQuery = "UPDATE books SET is_available = ?, borrowed_by = NULL WHERE id = ?";
+
+        try (Connection conn = db.connect();
+             PreparedStatement searchStmt = conn.prepareStatement(searchQuery);
+             PreparedStatement updateStmt = conn.prepareStatement(updateQuery)) {
+
+            // Search for the book
+            searchStmt.setInt(1, id);
+            ResultSet rs1 = searchStmt.executeQuery();
+
+            if (rs1.next()) {
+                boolean isAvailable = rs1.getBoolean("is_available");
+                String borrowedBy = rs1.getString("borrowed_by");
+
+                if (isAvailable) {
+                    return "Error: Book with id " + id + " is already available and cannot be returned.";
+                }
+
+                if (borrowedBy == null || !borrowedBy.equals(username)) {
+                    return "Error: Book with id " + id + " was not borrowed by " + username + ".";
+                }
+
+                // Update availability
+                updateStmt.setBoolean(1, true);
+                updateStmt.setInt(2, id);
+                int rowsUpdated = updateStmt.executeUpdate();
+
+                if (rowsUpdated > 0) {
+                    return "Book with id " + id + " has been returned successfully.";
+                } else {
+                    return "Error: Could not return book with id " + id;
+                }
+            } else {
+                return "Error: Book with id " + id + " not found.";
+            }
+        }
+    }
+
+
 //
 //    public void borrowBookById(int id,int userId) {
 //        for (Book book: books){
