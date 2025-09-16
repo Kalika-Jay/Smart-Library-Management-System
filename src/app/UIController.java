@@ -472,18 +472,14 @@ public class UIController {
     @FXML
     private void borrowBookByIdButton() throws SQLException {
         String text = bookIdField.getText().trim();
-
         if (text.isEmpty()) {
             System.out.println("Please enter a Book ID.");
             return;
         }
-
         try {
             int bookId = Integer.parseInt(text);
             String result = library.borrowBookById(bookId);
             System.out.println(result);
-            // Optionally show this in a Label instead of console
-            // statusLabel.setText(result);
         } catch (NumberFormatException e) {
             System.out.println("Invalid input! Please enter a valid numeric Book ID.");
         }

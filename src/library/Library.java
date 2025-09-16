@@ -43,7 +43,9 @@ public class Library {
                 String author = rs.getString("author");
                 boolean available = rs.getBoolean("is_available");
 
-                books.add("Id: "+id+" Title: "+title+" by "+author+" --- "+available);
+                books.add("📖 " + title + " (ID: " + id + ")\n" +
+                        "   ✍ Author: " + author + "\n" +
+                        "   📌 Status: " + (available ? "Available ✅" : "Borrowed ❌"));
             }
             if (books.isEmpty()) {
                 space();
@@ -79,7 +81,9 @@ public class Library {
                 int id = rs.getInt("id");
                 String author = rs.getString("author");
                 boolean available = rs.getBoolean("is_available");
-                books.add("Id: "+id+" Title: "+title+" by "+author+" --- "+available);
+                books.add( "📖 " + title + " (ID: " + id + ")\n" +
+                        "   ✍ Author: " + author + "\n" +
+                        "   📌 Status: " + (available ? "Available ✅" : "Borrowed ❌"));
             }
 
             if (books.isEmpty()) {
@@ -116,7 +120,9 @@ public class Library {
                 int id = rs.getInt("id");
                 String author = rs.getString("author");
                 boolean available = rs.getBoolean("is_available");
-                books.add("Id: "+id+" Title: "+title+" by "+author+" --- "+available);
+                books.add("📖 " + title + " (ID: " + id + ")\n" +
+                        "   ✍ Author: " + author + "\n" +
+                        "   📌 Status: " + (available ? "Available ✅" : "Borrowed ❌"));
             }
 
             if (books.isEmpty()) {
@@ -152,7 +158,9 @@ public class Library {
                 int id = rs.getInt("id");
                 String author = rs.getString("author");
                 boolean available = rs.getBoolean("is_available");
-                books.add("Id: "+id+" Title: "+title+" by "+author+" --- "+available);
+                books.add("📖 " + title + " (ID: " + id + ")\n" +
+                        "   ✍ Author: " + author + "\n" +
+                        "   📌 Status: " + (available ? "Available ✅" : "Borrowed ❌"));
             }
 
             if (books.isEmpty()) {
@@ -210,7 +218,7 @@ public class Library {
 
     public List<String> getAllUsers(){
         List<String> users = new ArrayList<>();
-        String query = "SELECT id,fullname,role FROM users";
+        String query = "SELECT id,fullname,username,role FROM users";
         try (Connection conn =db.connect();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
@@ -218,9 +226,11 @@ public class Library {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("fullname");
+                String username = rs.getString("username");
                 String role = rs.getString("role");
 
-                users.add(id + ". " + name + " is a " + role);
+                users.add("👤 " + name + " [@" + username + "]\n" +
+                        "   🔑 ID: " + id + " | 🎭 Role: " + role);
             }
             if (users.isEmpty()) {
                 space();
