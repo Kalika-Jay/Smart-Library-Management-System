@@ -31,7 +31,7 @@ public class Library {
 
     public List<String> getAllBooks() {
         List<String> books = new ArrayList<>();
-        String query = "SELECT id, title, author,is_available FROM books";
+        String query = "SELECT id, title, author,is_available,borrowed_by FROM books";
 
         try (Connection conn =db.connect();
              Statement stmt = conn.createStatement();
@@ -42,10 +42,11 @@ public class Library {
                 String title = rs.getString("title");
                 String author = rs.getString("author");
                 boolean available = rs.getBoolean("is_available");
+                String  borrowedBy = rs.getString("borrowed_by");
 
                 books.add("📖 " + title + " (ID: " + id + ")\n" +
                         "   ✍ Author: " + author + "\n" +
-                        "   📌 Status: " + (available ? "Available ✅" : "Borrowed ❌"));
+                        "   📌 Status: " + (available ? "Available ✅" : "Borrowed ❌ by "+borrowedBy));
             }
             if (books.isEmpty()) {
                 space();
@@ -305,9 +306,9 @@ public class Library {
 //        }
 //    }
 //
-public String borrowBookById(int id) throws SQLException {
+public String borrowBookById(int id,String username) throws SQLException {
     String searchQuery = "SELECT is_available FROM books WHERE id = ?";
-    String updateQuery = "UPDATE books SET is_available = ? WHERE id = ?";
+    String updateQuery = "UPDATE books SET is_available = ? , borrowed_by= ? WHERE id = ?";
 
     try (Connection conn = db.connect();
          PreparedStatement searchStmt = conn.prepareStatement(searchQuery);
@@ -326,7 +327,8 @@ public String borrowBookById(int id) throws SQLException {
 
             // Update availability
             updateStmt.setBoolean(1, false);
-            updateStmt.setInt(2, id);
+            updateStmt.setString (2, username);
+            updateStmt.setInt(3, id);
             int rowsUpdated = updateStmt.executeUpdate();
 
             if (rowsUpdated > 0) {

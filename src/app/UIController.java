@@ -30,7 +30,10 @@ public class UIController {
     @FXML
     private Label welcomeLabel;
 
+    private String loggedInUsername;
+
     public void setWelcomeMessage(String username) {
+        this.loggedInUsername = username;
         welcomeLabel.setText("Welcome, " + username + "!");
     }
 
@@ -478,8 +481,8 @@ public class UIController {
         }
         try {
             int bookId = Integer.parseInt(text);
-            String result = library.borrowBookById(bookId);
-            System.out.println(result);
+            String result = library.borrowBookById(bookId,loggedInUsername);
+            System.out.println(result+"by"+loggedInUsername);
         } catch (NumberFormatException e) {
             System.out.println("Invalid input! Please enter a valid numeric Book ID.");
         }
