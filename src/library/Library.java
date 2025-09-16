@@ -295,27 +295,41 @@ public class Library {
 //        }
 //    }
 //
-    public String borrowBookById(String id) throws SQLException {
-        Connection conn = db.connect();
-        String searchQuery = "SELECT * FROM books WHERE id = "+id;
-        String updateQuery = "UPDATE books SET is_available = false WHERE id = ?";
+public String borrowBookById(int id) throws SQLException {
+    String searchQuery = "SELECT is_available FROM books WHERE id = ?";
+    String updateQuery = "UPDATE books SET is_available = ? WHERE id = ?";
 
-        Statement searchStmt = conn.prepareStatement(searchQuery);
-        PreparedStatement updateStmt = conn.prepareStatement(updateQuery);
-        updateStmt.setString(1, id);
+    try (Connection conn = db.connect();
+         PreparedStatement searchStmt = conn.prepareStatement(searchQuery);
+         PreparedStatement updateStmt = conn.prepareStatement(updateQuery)) {
 
-        ResultSet rs1 = searchStmt.executeQuery(searchQuery);
+        // Search for the book
+        searchStmt.setInt(1, id);
+        ResultSet rs1 = searchStmt.executeQuery();
 
-        while (rs1.next()) {
-            if (!rs1.getBoolean("is_available")) {
-                System.out.println("Error: Book with id " + id + " not found.");
-                return "Error: Book with id " + id + " not found.";
-            }else{
-                updateStmt.executeQuery();
+        if (rs1.next()) {
+            boolean isAvailable = rs1.getBoolean("is_available");
+
+            if (!isAvailable) {
+                return "Error: Book with id " + id + " is not available.";
             }
+
+            // Update availability
+            updateStmt.setBoolean(1, false);
+            updateStmt.setInt(2, id);
+            int rowsUpdated = updateStmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                return "Book with id " + id + " has been borrowed successfully.";
+            } else {
+                return "Error: Could not borrow book with id " + id;
+            }
+        } else {
+            return "Error: Book with id " + id + " not found.";
         }
-        return "Book with id " + id + " has been borrowed successfully";
     }
+}
+
 //
 //    public void borrowBookById(int id,int userId) {
 //        for (Book book: books){

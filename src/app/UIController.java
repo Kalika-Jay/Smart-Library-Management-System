@@ -103,6 +103,8 @@ public class UIController {
     @FXML
     private AnchorPane hiddenArea5;
     @FXML
+    private AnchorPane hiddenArea6;
+    @FXML
     private Button toggleButton1;
     @FXML
     private Button toggleButton2;
@@ -112,6 +114,8 @@ public class UIController {
     private Button toggleButton4;
     @FXML
     private Button toggleButton5;
+    @FXML
+    private Button toggleButton6;
     @FXML
     private TextField nameFieldS;
     @FXML
@@ -149,12 +153,17 @@ public class UIController {
             hiddenArea5.setVisible(false);
             hiddenArea5.setManaged(false);
         }
+        if (hiddenArea6 != null) {
+            hiddenArea6.setVisible(false);
+            hiddenArea6.setManaged(false);
+        }
 
         if (toggleButton1 != null) toggleButton1.setText("Search by Author");
         if (toggleButton2 != null) toggleButton2.setText("Add book");
         if (toggleButton3 != null) toggleButton3.setText("Add Student");
         if (toggleButton4 != null) toggleButton4.setText("Add Librarian");
         if (toggleButton5 != null) toggleButton5.setText("Search by Name");
+        if (toggleButton6 != null) toggleButton6.setText("Borrow Book");
     }
 
     // Helper method to hide results list
@@ -371,6 +380,25 @@ public class UIController {
         }
     }
     @FXML
+    private void toggleBorrowBook() {
+        boolean currentlyVisible = hiddenArea6.isVisible();
+
+        if (currentlyVisible) {
+            // If currently visible, just hide it
+            hiddenArea6.setVisible(false);
+            hiddenArea6.setManaged(false);
+            toggleButton6.setText("Borrow Book");
+            hideResultsList();
+        } else {
+            // If currently hidden, hide all other areas first, then show this one
+            hideAllAreas();
+            hideResultsList();
+            hiddenArea6.setVisible(true);
+            hiddenArea6.setManaged(true);
+            toggleButton6.setText("Hide Area");
+        }
+    }
+    @FXML
     private Label loginStatusLabel;
     @FXML
     private TextField usernameField;
@@ -443,9 +471,23 @@ public class UIController {
     private TextField bookIdField;
     @FXML
     private void borrowBookByIdButton() throws SQLException {
-        if (bookIdField.getText().isEmpty()) {
-            library.borrowBookById(bookIdField.getText().trim());
+        String text = bookIdField.getText().trim();
+
+        if (text.isEmpty()) {
+            System.out.println("Please enter a Book ID.");
+            return;
+        }
+
+        try {
+            int bookId = Integer.parseInt(text);
+            String result = library.borrowBookById(bookId);
+            System.out.println(result);
+            // Optionally show this in a Label instead of console
+            // statusLabel.setText(result);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input! Please enter a valid numeric Book ID.");
         }
     }
+
 
 }
