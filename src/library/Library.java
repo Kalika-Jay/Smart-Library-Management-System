@@ -13,7 +13,7 @@ public class Library {
     }
 
     public void addBook(Book book) {
-        String sql = "INSERT INTO books(id, title, author) VALUES(?, ?, ?)";
+        String sql = "INSERT INTO books(id, title, author,description) VALUES(?, ?, ?,?)";
 
         try (Connection conn = db.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -21,6 +21,7 @@ public class Library {
             pstmt.setInt(1, book.getBookId());
             pstmt.setString(2, book.getBookName());
             pstmt.setString(3, book.getAuthor());
+            pstmt.setString(4,book.getDescription());
             pstmt.executeUpdate();
             System.out.println("Book added: " + book.getBookDetails());
 
@@ -380,6 +381,33 @@ public String borrowBookById(int id,String username) throws SQLException {
                 return "Error: Book with id " + id + " not found.";
             }
         }
+    }
+
+    public List<String> displayBookDescription(int id){
+        List<String> books = new ArrayList<>();
+        String query = "SELECT title,author,description FROM books WHERE id = ?";
+        try {
+            Connection conn = db.connect();
+            PreparedStatement pstm = conn.prepareStatement(query);
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                books.add(
+                        id + ". " +
+                                "📖 Title: " + rs.getString("title") + "\n" +
+                                "✍️ Author: " + rs.getString("author") + "\n" +
+                                "📝 Description: " + rs.getString("description")
+                );
+                return books;
+            }
+            if (books.isEmpty()) {
+                books.add("Error: No books found under the id " + id);
+                return books;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return books;
     }
 
 

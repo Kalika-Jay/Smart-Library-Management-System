@@ -110,6 +110,8 @@ public class UIController {
     @FXML
     private AnchorPane hiddenArea7;
     @FXML
+    private AnchorPane hiddenArea8;
+    @FXML
     private Button toggleButton1;
     @FXML
     private Button toggleButton2;
@@ -123,6 +125,8 @@ public class UIController {
     private Button toggleButton6;
     @FXML
     private Button toggleButton7;
+    @FXML
+    private Button toggleButton8;
     @FXML
     private TextField nameFieldS;
     @FXML
@@ -218,21 +222,21 @@ public class UIController {
             resultsList.getItems().addAll(books);
         }
     }
+    @FXML
+    private TextField descriptionField;
 
     @FXML
     private void onAddBookClicked() {
         hideAllAreas();
         hideResultsList();
-
-        String idText = idField.getText().trim();
-        int id = Integer.parseInt(idText);
         String title = titleField.getText().trim();
         String author = authorField2.getText().trim();
+        String description = descriptionField.getText().trim();
         if (!title.isEmpty() && !author.isEmpty()) {
-            library.addBook(new Book(id, title, author, true));
-            idField.clear();
+            library.addBook(new Book(title, author, true,description));
             titleField.clear();
             authorField2.clear();
+            descriptionField.clear();
         }
     }
     @FXML
@@ -441,6 +445,26 @@ public class UIController {
         }
     }
     @FXML
+    private void toggleDescriptionArea() {
+        boolean currentlyVisible = hiddenArea8.isVisible();
+
+        if (currentlyVisible) {
+            // If currently visible, just hide it
+            hiddenArea8.setVisible(false);
+            hiddenArea8.setManaged(false);
+            toggleButton8.setText("View Description");
+            hideResultsList();
+        } else {
+            // If currently hidden, hide all other areas first, then show this one
+            hideAllAreas();
+            hideResultsList();
+            hiddenArea8.setVisible(true);
+            hiddenArea8.setManaged(true);
+            toggleButton8.setText("Hide Area");
+        }
+    }
+
+    @FXML
     private Label loginStatusLabel;
     @FXML
     private TextField usernameField;
@@ -546,6 +570,29 @@ public class UIController {
             returnBookIdField.clear();
         } catch (NumberFormatException e) {
             StatusLabel.setText("❌ Invalid input! Please enter a valid numeric Book ID.");
+        }
+    }
+    @FXML
+    private TextField bookIdFieldDes;
+    @FXML
+    private void displayDescription(){
+        resultsList.setVisible(true);
+        resultsList.setManaged(true);
+        String text = bookIdFieldDes.getText().trim();
+        if (text.isEmpty()) {
+            resultsList.getItems().clear();
+            StatusLabel.setText("Please  enter a Book ID.");
+            bookIdFieldDes.clear();
+            return;
+        }
+        try {
+            int bookId = Integer.parseInt(text);
+            List<String> books= library.displayBookDescription(bookId);
+            resultsList.getItems().clear();
+            resultsList.getItems().addAll(books);
+            bookIdFieldDes.clear();
+        } catch (NumberFormatException e) {
+            throw new RuntimeException(e);
         }
     }
 

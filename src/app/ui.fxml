@@ -42,7 +42,7 @@
                         <!-- Title -->
                         <VBox prefHeight="83.0" prefWidth="717.0" spacing="5.0">
                             <children>
-                                <Label text="NEXUS LIBRARY" textFill="WHITE">
+                                <Label text="NEXUS LIBRARY - Student" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="36.0"/>
                                     </font>
@@ -176,13 +176,13 @@
                                 <!-- Management Actions -->
                                 <VBox spacing="10.0">
                                     <children>
-                                        <Button fx:id="toggleButton2" onAction="#toggleAddBookArea"
+                                        <Button fx:id="toggleButton8" onAction="#toggleDescriptionArea"
                                                 prefHeight="50.0" prefWidth="350.0"
                                                 style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #a29bfe, #6c5ce7);
                                                        -fx-text-fill: white; -fx-background-radius: 25; -fx-cursor: hand;
                                                        -fx-font-size: 14px; -fx-font-weight: bold;
                                                        -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.4), 10, 0.3, 0, 4);"
-                                                text="➕ Add New Book"/>
+                                                text="View Description"/>
 
                                         <Button fx:id="toggleButton6" onAction="#toggleBorrowBook"
                                                 prefHeight="50.0" prefWidth="350.0"
@@ -381,25 +381,25 @@
                         </AnchorPane>
 
                         <!-- Add Book Area -->
-                        <AnchorPane fx:id="hiddenArea2" managed="false" prefHeight="400.0" prefWidth="745.0" style="-fx-background-color: rgba(255,255,255,0.95); -fx-background-radius: 25;                                            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 20, 0.2, 0, 5);" visible="false">
+                        <AnchorPane fx:id="hiddenArea8" managed="false" prefHeight="400.0" prefWidth="745.0" style="-fx-background-color: rgba(255,255,255,0.95); -fx-background-radius: 25;                                            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 20, 0.2, 0, 5);" visible="false">
                             <children>
                                 <VBox layoutX="30.0" layoutY="30.0" prefWidth="685.0" spacing="25.0">
                                     <children>
                                         <HBox alignment="CENTER_LEFT" spacing="15.0">
                                             <children>
-                                                <Label text="➕" textFill="#a29bfe">
+                                                <Label>
                                                     <font>
                                                         <Font size="32.0" />
                                                     </font>
                                                 </Label>
                                                 <VBox>
                                                     <children>
-                                                        <Label text="Add New Book" textFill="#333">
+                                                        <Label text="View description" textFill="#333">
                                                             <font>
                                                                 <Font name="System Bold" size="24.0" />
                                                             </font>
                                                         </Label>
-                                                        <Label text="Add a new book to the library collection" textFill="#666">
+                                                        <Label text="View the description of a book" textFill="#666">
                                                             <font>
                                                                 <Font size="14.0" />
                                                             </font>
@@ -411,17 +411,14 @@
 
                                         <VBox spacing="15.0">
                                             <children>
-                                                <TextField fx:id="idField" prefHeight="50.0" prefWidth="685.0" promptText="Book ID (e.g., BK001)" style="-fx-background-color: #f8f9fa; -fx-background-radius: 12;                                                                   -fx-border-color: #e9ecef; -fx-border-radius: 12; -fx-border-width: 2;                                                                   -fx-padding: 12; -fx-font-size: 15px; -fx-prompt-text-fill: #aaa;" />
+                                                <TextField fx:id="bookIdFieldDes" prefHeight="50.0" prefWidth="685.0" promptText="Book ID (e.g., BK001)" style="-fx-background-color: #f8f9fa; -fx-background-radius: 12;                                                                   -fx-border-color: #e9ecef; -fx-border-radius: 12; -fx-border-width: 2;                                                                   -fx-padding: 12; -fx-font-size: 15px; -fx-prompt-text-fill: #aaa;" />
 
-                                                <TextField fx:id="titleField" prefHeight="50.0" prefWidth="685.0" promptText="Book Title (e.g., The Great Gatsby)" style="-fx-background-color: #f8f9fa; -fx-background-radius: 12;                                                                   -fx-border-color: #e9ecef; -fx-border-radius: 12; -fx-border-width: 2;                                                                   -fx-padding: 12; -fx-font-size: 15px; -fx-prompt-text-fill: #aaa;" />
-
-                                                <TextField fx:id="authorField2" prefHeight="50.0" prefWidth="685.0" promptText="Author Name (e.g., F. Scott Fitzgerald)" style="-fx-background-color: #f8f9fa; -fx-background-radius: 12;                                                                   -fx-border-color: #e9ecef; -fx-border-radius: 12; -fx-border-width: 2;                                                                   -fx-padding: 12; -fx-font-size: 15px; -fx-prompt-text-fill: #aaa;" />
                                             </children>
                                         </VBox>
 
                                         <HBox alignment="CENTER_LEFT" spacing="15.0">
                                             <children>
-                                                <Button onAction="#onAddBookClicked" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #a29bfe, #6c5ce7);                                                                -fx-text-fill: white; -fx-background-radius: 15; -fx-cursor: hand;                                                                -fx-font-size: 16px; -fx-font-weight: bold;                                                                -fx-effect: dropshadow(gaussian, rgba(162,155,254,0.4), 8, 0.3, 0, 3);" text="➕ Add Book" />
+                                                <Button onAction="#displayDescription" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #a29bfe, #6c5ce7);                                                                -fx-text-fill: white; -fx-background-radius: 15; -fx-cursor: hand;                                                                -fx-font-size: 16px; -fx-font-weight: bold;                                                                -fx-effect: dropshadow(gaussian, rgba(162,155,254,0.4), 8, 0.3, 0, 3);" text="View" />
                                             </children>
                                         </HBox>
                                     </children>

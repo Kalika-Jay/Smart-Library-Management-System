@@ -26,7 +26,6 @@ public class Main {
 //        library.addBook(new Book(1, "1984", "George Orwell",true));
 //        library.addBook(new Book(2, "Madolduwa", "Martin Wikramasinghe",true));
 //        library.addBook(new Book(3, "To Kill a Mockingbird", "Harper Lee",true));
-        library.addBook(new Book(4, "Animal Farm", "George Aniston",true));
         library.getAllBooks();
         library.getAllUsers();
         library.getBooksByAuthor("GEORGE");

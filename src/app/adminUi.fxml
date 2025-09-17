@@ -43,7 +43,7 @@
                         <!-- Title -->
                         <VBox prefHeight="83.0" prefWidth="717.0" spacing="5.0">
                             <children>
-                                <Label text="NEXUS LIBRARY" textFill="WHITE">
+                                <Label text="NEXUS LIBRARY - Administrator" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="36.0"/>
                                     </font>
@@ -328,11 +328,10 @@
 
                                         <VBox spacing="15.0">
                                             <children>
-                                                <TextField fx:id="idField" prefHeight="50.0" prefWidth="685.0" promptText="Book ID (e.g., BK001)" style="-fx-background-color: #f8f9fa; -fx-background-radius: 12;                                                                   -fx-border-color: #e9ecef; -fx-border-radius: 12; -fx-border-width: 2;                                                                   -fx-padding: 12; -fx-font-size: 15px; -fx-prompt-text-fill: #aaa;" />
-
                                                 <TextField fx:id="titleField" prefHeight="50.0" prefWidth="685.0" promptText="Book Title (e.g., The Great Gatsby)" style="-fx-background-color: #f8f9fa; -fx-background-radius: 12;                                                                   -fx-border-color: #e9ecef; -fx-border-radius: 12; -fx-border-width: 2;                                                                   -fx-padding: 12; -fx-font-size: 15px; -fx-prompt-text-fill: #aaa;" />
 
                                                 <TextField fx:id="authorField2" prefHeight="50.0" prefWidth="685.0" promptText="Author Name (e.g., F. Scott Fitzgerald)" style="-fx-background-color: #f8f9fa; -fx-background-radius: 12;                                                                   -fx-border-color: #e9ecef; -fx-border-radius: 12; -fx-border-width: 2;                                                                   -fx-padding: 12; -fx-font-size: 15px; -fx-prompt-text-fill: #aaa;" />
+                                                <TextField fx:id="descriptionField" prefHeight="50.0" prefWidth="685.0" promptText="Description" style="-fx-background-color: #f8f9fa; -fx-background-radius: 12;                                                                   -fx-border-color: #e9ecef; -fx-border-radius: 12; -fx-border-width: 2;                                                                   -fx-padding: 12; -fx-font-size: 15px; -fx-prompt-text-fill: #aaa;" />
                                             </children>
                                         </VBox>
 
