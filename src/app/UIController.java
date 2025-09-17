@@ -272,6 +272,18 @@ public class UIController {
             userNameFieldL.clear();
         }
     }
+    @FXML
+    private void onAddStudentClickedL() {
+        String name = nameFieldS.getText().trim();
+        String username = userNameFieldS.getText().trim();
+        String password = passwordFieldS.getText().trim();
+        if (!name.isEmpty() && !username.isEmpty() && !password.isEmpty()) {
+            library.registerUser(new Librarian(name,username,password));
+            nameFieldS.clear();
+            passwordFieldS.clear();
+            userNameFieldS.clear();
+        }
+    }
 
     @FXML
     private void getAllBooks() {
