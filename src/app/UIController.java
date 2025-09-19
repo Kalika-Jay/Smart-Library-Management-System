@@ -172,6 +172,10 @@ public class UIController {
             hiddenArea7.setVisible(false);
             hiddenArea7.setManaged(false);
         }
+        if(hiddenArea8 != null) {
+            hiddenArea8.setVisible(false);
+            hiddenArea8.setManaged(false);
+        }
         if (toggleButton1 != null) toggleButton1.setText("Search by Author");
         if (toggleButton2 != null) toggleButton2.setText("Add book");
         if (toggleButton3 != null) toggleButton3.setText("Add Student");
@@ -179,6 +183,7 @@ public class UIController {
         if (toggleButton5 != null) toggleButton5.setText("Search by Name");
         if (toggleButton6 != null) toggleButton6.setText("Borrow Book");
         if (toggleButton7 != null) toggleButton7.setText("Return Book");
+        if (toggleButton8 != null) toggleButton8.setText("View Description");
     }
 
     // Helper method to hide results list
