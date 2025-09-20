@@ -11,29 +11,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1200.0"
-            style="-fx-background-color: linear-gradient(to bottom, #141e30, #243b55); -fx-background-radius: 0; -fx-background-insets: 0;"
-            xmlns="http://javafx.com/javafx/24.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="app.UIController">
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: linear-gradient(to bottom, #141e30, #243b55); -fx-background-radius: 0; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.UIController">
 
     <children>
         <!-- Header Section with Glassmorphism -->
-        <VBox layoutX="40.0" layoutY="40.0" prefHeight="120.0" prefWidth="1120.0"
-              style="-fx-background-color: rgba(255,255,255,0.15); -fx-background-radius: 25;
-                     -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 25; -fx-border-width: 1;
-                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0.2, 0, 5); -fx-padding: 25;">
+        <VBox layoutX="40.0" layoutY="40.0" prefHeight="120.0" prefWidth="1120.0" style="-fx-background-color: rgba(255,255,255,0.15); -fx-background-radius: 25;                      -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 25; -fx-border-width: 1;                      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0.2, 0, 5); -fx-padding: 25;">
             <children>
                 <HBox alignment="CENTER_LEFT" prefWidth="1070.0" spacing="20.0">
                     <children>
                         <!-- Logo/Icon Area -->
-                        <VBox alignment="CENTER" prefHeight="70.0" prefWidth="80.0"
-                              style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #ff6b6b, #feca57);
-                                     -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.3, 0, 3);">
+                        <VBox alignment="CENTER" prefHeight="70.0" prefWidth="80.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #ff6b6b, #feca57);                                      -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.3, 0, 3);">
                             <children>
                                 <Label text="📚" textFill="WHITE">
                                     <font>
-                                        <Font size="32.0"/>
+                                        <Font size="32.0" />
                                     </font>
                                 </Label>
                             </children>
@@ -44,12 +35,12 @@
                             <children>
                                 <Label text="NEXUS LIBRARY - Student" textFill="WHITE">
                                     <font>
-                                        <Font name="System Bold" size="36.0"/>
+                                        <Font name="System Bold" size="36.0" />
                                     </font>
                                 </Label>
                                 <Label opacity="0.9" text="Advanced Digital Management System" textFill="#ffffff90">
                                     <font>
-                                        <Font name="System" size="16.0"/>
+                                        <Font name="System" size="16.0" />
                                     </font>
                                 </Label>
                             </children>
@@ -58,18 +49,12 @@
                         <!-- User Info & Logout -->
                         <VBox alignment="CENTER_RIGHT" prefHeight="95.0" prefWidth="196.0" spacing="8.0">
                             <children>
-                                <Label fx:id="welcomeLabel" prefHeight="86.0" prefWidth="247.0"
-                                       text="Welcome, Admin" textFill="WHITE">
+                                <Label fx:id="welcomeLabel" prefHeight="86.0" prefWidth="247.0" text="Welcome, Admin" textFill="WHITE">
                                     <font>
-                                        <Font name="System Bold" size="22.0"/>
+                                        <Font name="System Bold" size="22.0" />
                                     </font>
                                 </Label>
-                                <Button fx:id="logOutButton" onAction="#onClickLogOut"
-                                        prefHeight="35.0" prefWidth="100.0"
-                                        style="-fx-background-color: red; -fx-text-fill: white; -fx-background-radius: 20;
-                                               -fx-border-color: rgba(255,255,255,0.4); -fx-border-radius: 20; -fx-border-width: 1;
-                                               -fx-cursor: hand; -fx-font-size: 12px; -fx-font-weight: bold;"
-                                        text="Sign Out"/>
+                                <Button fx:id="logOutButton" onAction="#onClickLogOut" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: red; -fx-text-fill: white; -fx-background-radius: 20;                                                -fx-border-color: rgba(255,255,255,0.4); -fx-border-radius: 20; -fx-border-width: 1;                                                -fx-cursor: hand; -fx-font-size: 12px; -fx-font-weight: bold;" text="Sign Out" />
                             </children>
                         </VBox>
                     </children>
@@ -89,51 +74,39 @@
                             <children>
                                 <Label text="📊 Quick Stats" textFill="WHITE">
                                     <font>
-                                        <Font name="System Bold" size="18.0"/>
+                                        <Font name="System Bold" size="18.0" />
                                     </font>
                                 </Label>
 
                                 <HBox spacing="15.0">
                                     <children>
                                         <!-- Users Card -->
-                                        <VBox alignment="CENTER" prefHeight="80.0" prefWidth="160.0"
-                                              style="-fx-background-color: rgba(255,255,255,0.15); -fx-background-radius: 20;
-                                                     -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 20; -fx-border-width: 1;
-                                                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0.2, 0, 3); -fx-cursor: hand;">
+                                        <VBox alignment="CENTER" prefHeight="80.0" prefWidth="160.0" style="-fx-background-color: rgba(255,255,255,0.15); -fx-background-radius: 20;                                                      -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 20; -fx-border-width: 1;                                                      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0.2, 0, 3); -fx-cursor: hand;">
                                             <children>
-                                                <Button onAction="#getAllUsers"
-                                                        style="-fx-background-color: transparent; -fx-text-fill: white;
-                                                               -fx-font-size: 24px; -fx-cursor: hand; -fx-border-width: 0;"
-                                                        text="👥"/>
+                                                <Button onAction="#getAllUsers" style="-fx-background-color: transparent; -fx-text-fill: white;                                                                -fx-font-size: 24px; -fx-cursor: hand; -fx-border-width: 0;" text="👥" />
                                                 <Label text="View Users" textFill="WHITE">
                                                     <font>
-                                                        <Font name="System Bold" size="12.0"/>
+                                                        <Font name="System Bold" size="12.0" />
                                                     </font>
                                                 </Label>
                                             </children>
                                             <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                             </padding>
                                         </VBox>
 
                                         <!-- Books Card -->
-                                        <VBox alignment="CENTER" prefHeight="80.0" prefWidth="160.0"
-                                              style="-fx-background-color: rgba(255,255,255,0.15); -fx-background-radius: 20;
-                                                     -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 20; -fx-border-width: 1;
-                                                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0.2, 0, 3); -fx-cursor: hand;">
+                                        <VBox alignment="CENTER" prefHeight="80.0" prefWidth="160.0" style="-fx-background-color: rgba(255,255,255,0.15); -fx-background-radius: 20;                                                      -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 20; -fx-border-width: 1;                                                      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0.2, 0, 3); -fx-cursor: hand;">
                                             <children>
-                                                <Button onAction="#getAllBooks"
-                                                        style="-fx-background-color: transparent; -fx-text-fill: white;
-                                                               -fx-font-size: 24px; -fx-cursor: hand; -fx-border-width: 0;"
-                                                        text="📖"/>
+                                                <Button onAction="#getAllBooks" style="-fx-background-color: transparent; -fx-text-fill: white;                                                                -fx-font-size: 24px; -fx-cursor: hand; -fx-border-width: 0;" text="📖" />
                                                 <Label text="View Books" textFill="WHITE">
                                                     <font>
-                                                        <Font name="System Bold" size="12.0"/>
+                                                        <Font name="System Bold" size="12.0" />
                                                     </font>
                                                 </Label>
                                             </children>
                                             <padding>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                             </padding>
                                         </VBox>
                                     </children>
@@ -141,68 +114,44 @@
                             </children>
                         </VBox>
 
-                        <Separator style="-fx-background-color: rgba(255,255,255,0.3);"/>
+                        <Separator style="-fx-background-color: rgba(255,255,255,0.3);" />
 
                         <!-- Action Buttons -->
                         <VBox spacing="15.0">
                             <children>
-                                <Label text="🔧 Management Tools" textFill="WHITE">
+                                <Label text="🔍 Search for books" textFill="WHITE">
                                     <font>
-                                        <Font name="System Bold" size="18.0"/>
+                                        <Font name="System Bold" size="18.0" />
                                     </font>
                                 </Label>
 
                                 <!-- Search Actions -->
                                 <VBox spacing="10.0">
                                     <children>
-                                        <Button fx:id="toggleButton1" onAction="#toggleArea1"
-                                                prefHeight="50.0" prefWidth="350.0"
-                                                style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #ff6b6b, #ee5a52);
-                                                       -fx-text-fill: white; -fx-background-radius: 25; -fx-cursor: hand;
-                                                       -fx-font-size: 14px; -fx-font-weight: bold;
-                                                       -fx-effect: dropshadow(gaussian, rgba(238,90,82,0.4), 10, 0.3, 0, 4);"
-                                                text="🔍 Search by Author"/>
+                                        <Button fx:id="toggleButton1" onAction="#toggleArea1" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #ff6b6b, #ee5a52);                                                        -fx-text-fill: white; -fx-background-radius: 25; -fx-cursor: hand;                                                        -fx-font-size: 14px; -fx-font-weight: bold;                                                        -fx-effect: dropshadow(gaussian, rgba(238,90,82,0.4), 10, 0.3, 0, 4);" text="🔍 Search by Author" />
 
-                                        <Button fx:id="toggleButton5" onAction="#toggleSearchByTitle"
-                                                prefHeight="50.0" prefWidth="350.0"
-                                                style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #4ecdc4, #44a08d);
-                                                       -fx-text-fill: white; -fx-background-radius: 25; -fx-cursor: hand;
-                                                       -fx-font-size: 14px; -fx-font-weight: bold;
-                                                       -fx-effect: dropshadow(gaussian, rgba(68,160,141,0.4), 10, 0.3, 0, 4);"
-                                                text="🔍 Search by Title"/>
-                                    </children>
-                                </VBox>
-
-                                <!-- Management Actions -->
-                                <VBox spacing="10.0">
-                                    <children>
-                                        <Button fx:id="toggleButton8" onAction="#toggleDescriptionArea"
-                                                prefHeight="50.0" prefWidth="350.0"
-                                                style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #a29bfe, #6c5ce7);
-                                                       -fx-text-fill: white; -fx-background-radius: 25; -fx-cursor: hand;
-                                                       -fx-font-size: 14px; -fx-font-weight: bold;
-                                                       -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.4), 10, 0.3, 0, 4);"
-                                                text="View Description"/>
-
-                                        <Button fx:id="toggleButton6" onAction="#toggleBorrowBook"
-                                                prefHeight="50.0" prefWidth="350.0"
-                                                style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #fd79a8, #e84393);
-                                                       -fx-text-fill: white; -fx-background-radius: 25; -fx-cursor: hand;
-                                                       -fx-font-size: 14px; -fx-font-weight: bold;
-                                                       -fx-effect: dropshadow(gaussian, rgba(232,67,147,0.4), 10, 0.3, 0, 4);"
-                                                text="📤 Borrow Book"/>
-
-                                        <Button fx:id="toggleButton7" onAction="#toggleReturnBook"
-                                                prefHeight="50.0" prefWidth="350.0"
-                                                style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #00b894, #00a085);
-                                                       -fx-text-fill: white; -fx-background-radius: 25; -fx-cursor: hand;
-                                                       -fx-font-size: 14px; -fx-font-weight: bold;
-                                                       -fx-effect: dropshadow(gaussian, rgba(0,160,133,0.4), 10, 0.3, 0, 4);"
-                                                text="📥 Return Book"/>
+                                        <Button fx:id="toggleButton5" onAction="#toggleSearchByTitle" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #4ecdc4, #44a08d);                                                        -fx-text-fill: white; -fx-background-radius: 25; -fx-cursor: hand;                                                        -fx-font-size: 14px; -fx-font-weight: bold;                                                        -fx-effect: dropshadow(gaussian, rgba(68,160,141,0.4), 10, 0.3, 0, 4);" text="🔍 Search by Title" />
+                                        <Button fx:id="toggleButton8" onAction="#toggleDescriptionArea" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #a29bfe, #6c5ce7);                                                        -fx-text-fill: white; -fx-background-radius: 25; -fx-cursor: hand;                                                        -fx-font-size: 14px; -fx-font-weight: bold;                                                        -fx-effect: dropshadow(gaussian, rgba(108,92,231,0.4), 10, 0.3, 0, 4);" text="View Description" />
                                     </children>
                                 </VBox>
                             </children>
                         </VBox>
+                  <Separator style="-fx-background-color: rgba(255,255,255,0.3);" />
+
+                                <!-- Management Actions -->
+                          <VBox spacing="10.0">
+                              <children>
+                        <Label text="Borrow and Return" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+
+                                        <Button fx:id="toggleButton6" onAction="#toggleBorrowBook" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #fd79a8, #e84393);                                                        -fx-text-fill: white; -fx-background-radius: 25; -fx-cursor: hand;                                                        -fx-font-size: 14px; -fx-font-weight: bold;                                                        -fx-effect: dropshadow(gaussian, rgba(232,67,147,0.4), 10, 0.3, 0, 4);" text="📤 Borrow Book" />
+
+                                        <Button fx:id="toggleButton7" onAction="#toggleReturnBook" prefHeight="50.0" prefWidth="350.0" style="-fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #00b894, #00a085);                                                        -fx-text-fill: white; -fx-background-radius: 25; -fx-cursor: hand;                                                        -fx-font-size: 14px; -fx-font-weight: bold;                                                        -fx-effect: dropshadow(gaussian, rgba(0,160,133,0.4), 10, 0.3, 0, 4);" text="📥 Return Book" />
+                              </children>
+                          </VBox>
                     </children>
                 </VBox>
 
@@ -212,7 +161,7 @@
                         <!-- Status Label -->
                         <Label fx:id="StatusLabel" textFill="WHITE" wrapText="true">
                             <font>
-                                <Font name="System Bold" size="14.0"/>
+                                <Font name="System Bold" size="14.0" />
                             </font>
                         </Label>
 
@@ -427,17 +376,12 @@
                         </AnchorPane>
 
                         <!-- Results List -->
-                        <ListView fx:id="resultsList" managed="false" prefHeight="200.0" prefWidth="740.0"
-                                  style="-fx-background-color: #ffffff; -fx-background-radius: 15;
-                                         -fx-border-color: #e9ecef; -fx-border-radius: 15; -fx-border-width: 2;
-                                         -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 8, 0, 0, 3);
-                                         -fx-font-size: 14px;"
-                                  visible="false"/>
+                        <ListView fx:id="resultsList" managed="false" prefHeight="200.0" prefWidth="740.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15;                                          -fx-border-color: #e9ecef; -fx-border-radius: 15; -fx-border-width: 2;                                          -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 8, 0, 0, 3);                                          -fx-font-size: 14px;" visible="false" />
                     </children>
                 </VBox>
             </children>
             <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </padding>
         </HBox>
     </children>

@@ -229,16 +229,19 @@ public class UIController {
     }
     @FXML
     private TextField descriptionField;
+    @FXML
+    private TextField bookIDField;
 
     @FXML
     private void onAddBookClicked() {
         hideAllAreas();
         hideResultsList();
+        String id = bookIDField.getText().trim();
         String title = titleField.getText().trim();
         String author = authorField2.getText().trim();
         String description = descriptionField.getText().trim();
         if (!title.isEmpty() && !author.isEmpty()) {
-            library.addBook(new Book(title, author, true,description));
+            library.addBook(new Book(id,title, author, true,description));
             titleField.clear();
             authorField2.clear();
             descriptionField.clear();

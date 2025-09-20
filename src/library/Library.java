@@ -18,7 +18,7 @@ public class Library {
         try (Connection conn = db.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, book.getBookId());
+            pstmt.setString(1, book.getBookID());
             pstmt.setString(2, book.getBookName());
             pstmt.setString(3, book.getAuthor());
             pstmt.setString(4,book.getDescription());
