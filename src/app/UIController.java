@@ -77,7 +77,7 @@ public class UIController {
     }
     @FXML
     public void switchToAdminLogin(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("adminlogin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("adminLogin.fxml"));
         primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         primaryStage.setScene(scene);
